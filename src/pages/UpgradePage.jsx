@@ -1,24 +1,23 @@
-import React from "react";
 import "../styles/UpgradePage.scss";
 
 const UpgradePage = () => {
     return (
-        <div className="pricing-container container py-5">
+        <div className="pricing-container container-fluid py-5">
             <div className="row justify-content-center align-items-stretch">
                 {/* Free Plan */}
                 <div className="col-md-4 mb-4 d-flex">
                     <div className="card pricing-card free h-100 w-100">
                         <div className="card-body d-flex flex-column">
-                            <h3 className="card-title">Miễn phí</h3>
-                            <h2 className="price">$0 <small>USD/tháng</small></h2>
-                            <p className="description">Cùng khám phá sự hỗ trợ của AI trong các công việc hằng ngày của bạn</p>
+                            <h3 className="card-title">Basic Plan</h3>
+                            <h2 className="price">0 <small>VNĐ/tháng</small></h2>
+                            <p className="description">Dành cho người dùng mới muốn trải nghiệm nền tảng BellaVita.</p>
                             <ul className="features flex-grow-1">
-                                <li>Truy cập GPT-4o mini và tính năng suy luận</li>
-                                <li>Chế độ thoại tiêu chuẩn</li>
-                                <li>Dữ liệu thời gian thực từ web qua tính năng tìm kiếm</li>
-                                <li>Truy cập giới hạn vào GPT-4o và o4-mini</li>
-                                <li>Hạn chế quyền truy cập vào các tính năng tải tệp lên, phân tích dữ liệu nâng cao và tạo ảnh</li>
-                                <li>Sử dụng GPT tùy chỉnh</li>
+                                <li>Truy cập kho sản phẩm đa dạng từ nhiều thương hiệu.</li>
+                                <li>Nhận tư vấn cơ bản từ AI (dựa trên loại da & mục tiêu chăm sóc).</li>
+                                <li>Xem đánh giá & nhận xét từ cộng đồng người dùng.</li>
+                                <li>Tạo danh sách yêu thích & lưu sản phẩm.</li>
+                                <li>Hỗ trợ khách hàng qua chatbot 24/7.</li>
+                                <li>Nhận thông báo khuyến mãi & sản phẩm mới phù hợp.</li>
                             </ul>
                             <button className="btn btn-secondary w-100 mt-auto" disabled>Gói hiện tại của bạn</button>
                         </div>
@@ -30,20 +29,20 @@ const UpgradePage = () => {
                     <div className="card pricing-card plus h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h3 className="card-title d-flex justify-content-between align-items-center">
-                                Plus <span className="badge bg-success text-white">Phổ biến</span>
+                                Premium Plan <span className="badge bg-secondary text-white">Phổ biến</span>
                             </h3>
-                            <h2 className="price">$20 <small>USD/tháng</small></h2>
-                            <p className="description">Nâng cao năng suất và tính sáng tạo với quyền truy cập mở rộng</p>
+                            <h2 className="price">250.000 <small>VNĐ/tháng</small></h2>
+                            <p className="description">Dành cho người dùng thường xuyên cần tư vấn chuyên sâu & ưu đãi độc quyền.</p>
                             <ul className="features flex-grow-1">
-                                <li>Mọi tính năng trong gói Free</li>
-                                <li>Mở rộng quyền truy cập vào các tính năng nhắn tin, tải tệp lên, phân tích dữ liệu nâng cao và tạo ảnh</li>
-                                <li>Chế độ thoại tiêu chuẩn và nâng cao</li>
-                                <li>Quyền truy cập vào chức năng nghiên cứu chuyên sâu, nhiều mô hình suy luận (o4-mini, o4, o3...)</li>
-                                <li>Tạo và sử dụng các nhiệm vụ, dự án cũng như GPT tùy chỉnh</li>
-                                <li>Quyền truy cập hạn chế vào chức năng tạo video Sora</li>
-                                <li>Cơ hội để thử nghiệm các tính năng mới</li>
+                                <li>Tất cả các tiện ích từ Basic Plan.</li>
+                                <li>AI tư vấn nâng cao theo thời gian thực (phân tích thói quen, khí hậu, độ tuổi...).</li>
+                                <li>Ưu đãi độc quyền từ đối tác (giảm giá, quà tặng).</li>
+                                <li>Gợi ý bộ sản phẩm trọn gói cá nhân hóa (skincare routine, makeup...).</li>
+                                <li>Ưu tiên hỗ trợ từ chuyên viên tư vấn thật.</li>
+                                <li>Ưu tiên xử lý đơn hàng và giao hàng nhanh.</li>
+                                <li>Tự động cập nhật routine chăm sóc theo mùa, thời tiết và xu hướng.</li>
                             </ul>
-                            <button className="btn btn-success w-100 mt-auto">Chuyển sang Plus</button>
+                            <button className="btn btn-warning w-100 mt-auto">Chuyển sang Plus</button>
                         </div>
                     </div>
                 </div>
@@ -52,18 +51,19 @@ const UpgradePage = () => {
                 <div className="col-md-4 mb-4 d-flex">
                     <div className="card pricing-card pro h-100 w-100">
                         <div className="card-body d-flex flex-column">
-                            <h3 className="card-title">Pro</h3>
-                            <h2 className="price">$200 <small>USD/tháng</small></h2>
-                            <p className="description">Khai thác tối đa OpenAI với cấp độ truy cập cao nhất</p>
+                            <h3 className="card-title">Annual Plan</h3>
+                            <h2 className="price">1.200.000 <small>VNĐ/năm</small></h2>
+                            <p className="description">Gói tiết kiệm nhất với đầy đủ tiện ích cao cấp và
+                                quyền lợi dành riêng cho thành viên VIP.</p>
                             <ul className="features flex-grow-1">
-                                <li>Mọi tính năng trong gói Plus</li>
-                                <li>Truy cập không giới hạn vào tất cả các mô hình suy luận và GPT-4o</li>
-                                <li>Quyền truy cập không giới hạn vào chế độ thoại nâng cao</li>
-                                <li>Mở rộng quyền truy cập vào chức năng nghiên cứu chuyên sâu</li>
-                                <li>Truy cập vào các bản xem trước nghiên cứu của GPT-4.5 và Operator</li>
-                                <li>Truy cập chế độ o1 pro, tăng khả năng trả lời tối ưu</li>
-                                <li>Quyền truy cập mở rộng vào video Sora</li>
-                                <li>Xem trước nghiên cứu của tác nhân Codex</li>
+                                <li>Tất cả các tiện ích từ Premium Plan.</li>
+                                <li>Tư vấn trực tiếp với chuyên gia mỗi quý (qua video call).</li>
+                                <li>Truy cập sớm các sản phẩm và tính năng mới.</li>
+                                <li>Quà tặng sinh nhật và ưu đãi cá nhân hóa theo từng dịp lễ.</li>
+                                <li>Ưu tiên tham gia các sự kiện độc quyền (workshop, livestream, flash sale VIP).</li>
+                                <li>Tùy chỉnh giao diện trải nghiệm AI theo phong cách cá nhân.</li>
+                                <li>Theo dõi tiến trình cải thiện làn da qua AI định kỳ (Skin Progress Tracker).</li>
+                                <li>Huy hiệu thành viên VIP & quyền truy cập nhóm cộng đồng riêng tư.</li>
                             </ul>
                             <button className="btn btn-dark w-100 mt-auto">Chuyển sang Pro</button>
                             <small className="text-muted d-block mt-3">
