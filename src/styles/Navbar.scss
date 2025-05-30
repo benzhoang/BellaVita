@@ -1,0 +1,99 @@
+.custom-navbar {
+    background-color: #A4A199;
+    color: white;
+    padding: 0;
+
+    .navbar-logo {
+        height: 60px;
+        width: 60px;
+        /* Adjusted to match height for circular shape */
+        object-fit: contain;
+        border-radius: 50%;
+        /* Make logo circular */
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        /* Space between logo and text */
+    }
+
+    .navbar-title {
+        font-family: 'Meow Script';
+        font-size: 1.8rem;
+        color: #000; // or your desired color
+        margin-left: 8px;
+    }
+
+    .nav-link {
+        color: black !important;
+        transition: color 0.3s;
+
+        &:hover {
+            color: silver !important;
+        }
+    }
+
+    .search-box {
+        margin-right: 10px;
+        background-color: transparent; // Trong suốt
+        border-radius: 0.375rem;
+        width: 300px;
+        border: 1px solid #8C897F; // Viền nhẹ nhàng, gần tông với #A4A199
+
+        .form-control {
+            background-color: transparent; // Input trong suốt
+            color: white;
+            border: none; // Bỏ viền input để hòa với search-box
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            &:focus {
+                border-color: transparent; // Không viền khi focus
+                box-shadow: none;
+            }
+        }
+
+        .input-group-text {
+            background-color: transparent; // Trong suốt cho input-group-text
+            border: none; // Bỏ viền
+        }
+    }
+
+    .btn-login,
+    .btn-signup {
+        background-color: #81673e;
+        border-radius: 8px;
+        min-width: 100px;
+        color: white;
+        transition: color 0.3s;
+        display: inline-block;
+        text-align: center;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    .btn-search {
+        background-color: #8C897F; // Màu gần tông với #A4A199
+        border: none; // Bỏ viền để gắn liền với input trong suốt
+        color: white;
+        padding: 0.375rem 0.75rem;
+        border-top-right-radius: 0.375rem;
+        border-bottom-right-radius: 0.375rem;
+
+        &:hover {
+            background-color: #7A7368; // Tông tối hơn một chút khi hover
+            color: white;
+        }
+
+        i {
+            font-size: 1rem;
+        }
+    }
+}
