@@ -1,41 +1,128 @@
-import { Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import '../styles/ProductPage.scss';
+import Image from '../images/Images.webp';
 
-const HomePage = () => {
+const ProductPage = () => {
+    const itemsPerPage = 12;
+    const totalProducts = 120;
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const sharedProductContent = {
+        image: Image,
+        discount: "-40%",
+        title: "Bộ đôi Dưỡng Sáng Trẻ Hóa Phục Hồi Da - Niacinamide Essence & Hyaluronic Acid Essence",
+        oldPrice: "1.000.000 đ",
+        newPrice: "598.000 đ",
+        buyText: "MUA NGAY",
+        cartText: "Thêm vào giỏ hàng"
+    };
+
+    const allProducts = new Array(totalProducts).fill(null).map((_, index) => ({
+        id: index + 1,
+        ...sharedProductContent
+    }));
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentProducts = allProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleClick = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+
+    const renderPageNumbers = () => {
+        const pages = [];
+
+        if (totalPages <= 5) {
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            if (currentPage <= 3) {
+                pages.push(1, 2, 3, 4, '...', totalPages);
+            } else if (currentPage >= totalPages - 2) {
+                pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+            } else {
+                pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+            }
+        }
+
+        return pages.map((page, index) =>
+            page === '...' ? (
+                <li key={index} className="page-item disabled">
+                    <span className="page-link">...</span>
+                </li>
+            ) : (
+                <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                    <button className="page-link" onClick={() => handleClick(page)}>{page}</button>
+                </li>
+            )
+        );
+    };
+
     return (
-        <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    backgroundColor: '#f5f5f5',
-                    paddingTop: 15,
-                    paddingBottom: 10,
-                    width: '1520px',
-                    textAlign: 'center'
-                }}
-            >
-                <Box>
-                    <Typography variant="h2" gutterBottom>
-                        Welcome to This ProductPage
-                    </Typography>
-                    <Typography variant="body1" mb={4}>
-                        This is the homepage content. Feel free to customize it!
-                    </Typography>
+        <div className="productpage container py-5" style={{ marginTop: '60px' }}>
+            <div className="section mb-5">
+                <div className="category-tabs d-flex justify-content-center gap-3 mb-3 flex-wrap">
+                    <button className="category-btn">Trang điểm</button>
+                    <button className="category-btn">Chăm sóc da</button>
+                    <button className="category-btn">Chăm sóc cá nhân</button>
+                    <button className="category-btn">Chăm sóc tóc</button>
+                    <button className="category-btn">Chăm sóc body</button>
+                </div>
 
-                    {[...Array(10)].map((_, i) => (
-                        <Box key={i} mb={5}>
-                            <Typography variant="h4" gutterBottom>
-                                Welcome to This ProductPage
-                            </Typography>
-                            <Typography variant="body1">
-                                This is the homepage content. Feel free to customize it!
-                            </Typography>
-                        </Box>
+                <h2 className="section-header text-left mb-4">Tất cả sản phẩm</h2>
+
+                <div className="row gx-4 gy-4">
+                    {currentProducts.map((product, idx) => (
+                        <div className="col-md-3" key={idx}>
+                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+                                <div style={{ position: 'relative' }}>
+                                    <img src={product.image} alt="product" className="card-image img-fluid" />
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '10px',
+                                        left: '10px',
+                                        backgroundColor: '#e60023',
+                                        color: '#fff',
+                                        padding: '4px 8px',
+                                        fontSize: '12px',
+                                        borderRadius: '4px'
+                                    }}>{product.discount}</div>
+                                </div>
+                                <h6 className="mt-2" style={{ fontSize: '14px' }}>{product.title}</h6>
+                                <div className="mt-1">
+                                    <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>{product.oldPrice}</span>
+                                    <span style={{ color: '#e60023', fontWeight: 'bold', fontSize: '16px', marginLeft: '6px' }}>{product.newPrice}</span>
+                                </div>
+                                <div className="d-flex justify-content-between mt-2">
+                                    <button className="btn btn-outline-secondary btn-sm">{product.cartText}</button>
+                                    <button className="btn btn-danger btn-sm">{product.buyText}</button>
+                                </div>
+                            </div>
+                        </div>
                     ))}
-                </Box>
-            </Box>
-        </>
+                </div>
+
+                {/* Pagination */}
+                <div className="pagination-container mt-5 d-flex justify-content-center">
+                    <nav>
+                        <ul className="pagination">
+                            <li className="page-item"><button className="page-link" onClick={() => handleClick(1)}>&laquo;</button></li>
+                            <li className="page-item"><button className="page-link" onClick={() => handleClick(currentPage - 1)}>&lt;</button></li>
+                            {renderPageNumbers()}
+                            <li className="page-item"><button className="page-link" onClick={() => handleClick(currentPage + 1)}>&gt;</button></li>
+                            <li className="page-item"><button className="page-link" onClick={() => handleClick(totalPages)}>&raquo;</button></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     );
 };
 
-export default HomePage;
+export default ProductPage;
