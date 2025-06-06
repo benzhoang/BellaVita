@@ -3,7 +3,7 @@ import "../styles/UpgradePage.scss";
 const UpgradePage = () => {
     return (
         <div className="pricing-container container-fluid py-5">
-            <div className="row justify-content-center align-items-stretch">
+            <div className="row justify-content-center align-items-stretch mt-5">
                 {/* Free Plan */}
                 <div className="col-md-4 mb-4 d-flex">
                     <div className="card pricing-card free h-100 w-100">

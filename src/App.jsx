@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +12,7 @@ import DiscountPage from "./pages/DiscountPage";
 import CartPage from "./pages/CartPage";
 import UpgradePage from "./pages/UpgradePage";
 import AboutUsPage from "./pages/AboutUsPage";
+import './App.css';
 
 // Wrapper component to conditionally render Navbar and Footer
 const AppLayout = () => {
