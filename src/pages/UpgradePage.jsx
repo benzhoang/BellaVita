@@ -66,9 +66,6 @@ const UpgradePage = () => {
                                 <li>Huy hiệu thành viên VIP & quyền truy cập nhóm cộng đồng riêng tư.</li>
                             </ul>
                             <button className="btn btn-dark w-100 mt-auto">Chuyển sang Pro</button>
-                            <small className="text-muted d-block mt-3">
-                                Không giới hạn tùy thuộc vào các quy định bảo vệ tránh lạm dụng
-                            </small>
                         </div>
                     </div>
                 </div>
