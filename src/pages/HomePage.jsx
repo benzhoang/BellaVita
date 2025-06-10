@@ -19,54 +19,58 @@ const HomePage = () => {
             buyText: "MUA NGAY",
             cartText: "Thêm vào giỏ hàng"
         }));
+        
 
-    const renderCards = (data, basePath) => {
-        const itemsPerSlide = 4;
-        const numSlides = Math.ceil(data.length / itemsPerSlide);
-        const slides = Array.from({ length: numSlides }, (_, i) =>
-            data.slice(i * itemsPerSlide, (i + 1) * itemsPerSlide)
-        );
+const renderCards = (data, basePath) => {
+  const itemsPerSlide = 4;
+  const numSlides = Math.ceil(data.length / itemsPerSlide);
+  const slides = Array.from({ length: numSlides }, (_, i) =>
+    data.slice(i * itemsPerSlide, (i + 1) * itemsPerSlide)
+  );
 
-        return (
-            <div id={`carousel-${basePath}`} className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                    {slides.map((slide, slideIndex) => (
-                        <div className={`carousel-item ${slideIndex === 0 ? "active" : ""}`} key={slideIndex}>
-                            <div className="row gx-4 gy-4">
-                                {slide.map((item) => (
-                                    <div className="col-md-3 col-6" key={item.id}>
-                                        <Link to={`/${basePath}/${item.id}`} className="custom-card-link">
-                                            <div className="custom-card">
-                                                <div className="discount-tag">{item.discount}</div>
-                                                <img src={item.image} alt="card-img" className="card-image" />
-                                                <div className="card-body">
-                                                    <p className="card-title">{item.title}</p>
-                                                    <div className="price-wrapper">
-                                                        <span className="old-price">{item.oldPrice}</span>
-                                                        <span className="current-price">{item.newPrice}</span>
-                                                    </div>
-                                                    <div className="card-buttons">
-                                                        <button className="add-to-cart-btn">{item.cartText}</button>
-                                                        <button className="buy-button">{item.buyText}</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target={`#carousel-${basePath}`} data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target={`#carousel-${basePath}`} data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
+  return (
+    <div id={`carousel-${basePath}`} className="carousel slide custom-carousel" data-bs-ride="carousel">
+      <div className="carousel-inner px-0">
+        {slides.map((slide, slideIndex) => (
+          <div className={`carousel-item ${slideIndex === 0 ? "active" : ""}`} key={slideIndex}>
+            <div className="d-flex gap-3 justify-content-center px-3">
+              {slide.map((item) => (
+                <Link to={`/${basePath}/${item.id}`} className="custom-card-link" key={item.id}>
+                  <div className="custom-card">
+                    <div className="discount-tag">{item.discount}</div>
+                    <img src={item.image} alt="card-img" className="card-image" />
+                    <div className="card-body">
+                      <p className="card-title">{item.title}</p>
+                      <div className="price-wrapper">
+                        <span className="old-price">{item.oldPrice}</span>
+                        <span className="current-price">{item.newPrice}</span>
+                      </div>
+                      <div className="card-buttons">
+                        <button className="add-to-cart-btn">{item.cartText}</button>
+                        <button className="buy-button">{item.buyText}</button>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-        );
-    };
+          </div>
+        ))}
+      </div>
+
+      <button className="carousel-control-prev custom-carousel-control" type="button" data-bs-target={`#carousel-${basePath}`} data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button className="carousel-control-next custom-carousel-control" type="button" data-bs-target={`#carousel-${basePath}`} data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  );
+};
+
+
+
+
 
     const productCarousel = (
         <div className="carousel-wrapper mb-5">
@@ -144,7 +148,7 @@ const HomePage = () => {
                     "ZEE Dưỡng trắng da 150ml",
                     "ZEE Dưỡng trắng da 200ml",
                     "ZEE Dưỡng trắng da 250ml",
-                    "ZEE Dưỡng trắng da 300ml"
+                    "ZEE Dưỡng trắng da 300ml",
                 ]), "products")}
             </div>
 

@@ -1,0 +1,71 @@
+.discount-page {
+    background-color: #FCFDF0;
+
+    .carousel-wrapper {
+        margin: 100px 0px;
+        padding: 0 150px;
+         
+        .image {
+            height: 600px;
+            object-fit: cover;
+            border-radius: 10px;
+            padding-top: 29px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            padding: 20px;
+        }
+    }
+
+    .carousel-item {
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        filter: invert(1);
+    }
+
+    
+    .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 32px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .card-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .card-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        .card-title {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #e60023;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+}
