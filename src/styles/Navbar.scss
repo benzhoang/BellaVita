@@ -97,3 +97,118 @@
         }
     }
 }
+
+.btn-user {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        background: #f8f9fa;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #e9ecef;
+        }
+    }
+
+    .user-email {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #2c3e50;
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .user-role {
+        font-size: 0.7rem;
+        color: #6c757d;
+    }
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 12px;
+    min-width: 280px;
+    margin-top: 8px;
+
+    .dropdown-header {
+        padding: 0 0 12px 0;
+
+        .user-avatar-small {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: #666;
+        }
+    }
+
+    .dropdown-divider {
+        margin: 8px 0;
+        opacity: 0.1;
+    }
+
+    .dropdown-item {
+        border-radius: 8px;
+        padding: 10px;
+        transition: all 0.2s ease;
+        margin: 2px 0;
+
+        &:hover {
+            background-color: #f8f9fa;
+        }
+
+        &.text-danger {
+            &:hover {
+                background-color: #fff5f5;
+            }
+        }
+
+        .dropdown-icon-wrapper {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+
+        &:hover .dropdown-icon-wrapper {
+            background: #e9ecef;
+        }
+
+        span {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        small {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+    }
+}

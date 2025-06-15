@@ -1,24 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/LoginPage.scss';
-import Logo from '../images/Logo.jpg'
+import Logo from '../images/Logo.jpg';
 
 const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/auth/login`,
+                { email, password }
+            );
+
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('userEmail', email); // Store email in localStorage
+            alert('Login successful!');
+
+            navigate('/');
+        } catch (err) {
+            console.error(err);
+            setError('Login failed. Please check your credentials.');
+        }
+    };
+
     return (
         <div className="login-page d-flex align-items-center">
             <div className="login-blur-box d-flex justify-content-center align-items-center">
                 <div className="login-form-container text-center">
                     <h2 className="mb-4">Log in</h2>
 
+                    {error && <div className="alert alert-danger">{error}</div>}
+
                     <input
                         type="email"
                         placeholder="Email"
                         className="form-control mb-3"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <input
                         type="password"
                         placeholder="Password"
                         className="form-control mb-3"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <div className="d-flex justify-content-between align-items-center mb-3">
@@ -37,7 +69,7 @@ const LoginPage = () => {
                         </p>
                     </div>
 
-                    <button className="btn btn-primary w-100 mb-3">
+                    <button className="btn btn-primary w-100 mb-3" onClick={handleLogin}>
                         Log in
                     </button>
 

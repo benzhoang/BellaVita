@@ -8,6 +8,16 @@ const ProductPage = () => {
     const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [activeCategory, setActiveCategory] = useState('all');
+
+    const categories = [
+        { id: 'all', name: 'Tất cả' },
+        { id: 'makeup', name: 'Trang điểm' },
+        { id: 'skincare', name: 'Chăm sóc da' },
+        { id: 'personal', name: 'Chăm sóc cá nhân' },
+        { id: 'hair', name: 'Chăm sóc tóc' },
+        { id: 'body', name: 'Chăm sóc body' }
+    ];
 
     const sharedProductContent = {
         image: Image,
@@ -65,14 +75,18 @@ const ProductPage = () => {
     };
 
     return (
-        <div className="productpage container py-5" style={{ marginTop: '60px' }}>
+        <div className="productpage container py-5" style={{ marginTop: '60px', paddingLeft: '40px', paddingRight: '40px' }}>
             <div className="section mb-5">
-                <div className="category-tabs d-flex justify-content-center gap-3 mb-3 flex-wrap">
-                    <button className="category-btn">Trang điểm</button>
-                    <button className="category-btn">Chăm sóc da</button>
-                    <button className="category-btn">Chăm sóc cá nhân</button>
-                    <button className="category-btn">Chăm sóc tóc</button>
-                    <button className="category-btn">Chăm sóc body</button>
+                <div className="category-tabs d-flex justify-content-center gap-3 mb-5 flex-wrap">
+                    {categories.map((category) => (
+                        <button
+                            key={category.id}
+                            className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
+                            onClick={() => setActiveCategory(category.id)}
+                        >
+                            {category.name}
+                        </button>
+                    ))}
                 </div>
 
                 <h2 className="section-header text-left mb-4">Tất cả sản phẩm</h2>
@@ -80,9 +94,9 @@ const ProductPage = () => {
                 <div className="row gx-4 gy-4">
                     {currentProducts.map((product, idx) => (
                         <div className="col-md-3" key={idx}>
-                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', padding: '8px' }}>
                                 <div style={{ position: 'relative' }}>
-                                    <img src={product.image} alt="product" className="card-image img-fluid" />
+                                    <img src={product.image} alt="product" className="card-image img-fluid" style={{ maxHeight: '200px', objectFit: 'contain' }} />
                                     <div style={{
                                         position: 'absolute',
                                         top: '10px',
@@ -94,8 +108,8 @@ const ProductPage = () => {
                                         borderRadius: '4px'
                                     }}>{product.discount}</div>
                                 </div>
-                                <h6 className="mt-2" style={{ fontSize: '14px' }}>{product.title}</h6>
-                                <div className="mt-1">
+                                <h6 className="mt-2" style={{ fontSize: '14px', marginBottom: '4px' }}>{product.title}</h6>
+                                <div className="mt-1" style={{ marginBottom: '4px' }}>
                                     <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>{product.oldPrice}</span>
                                     <span style={{ color: '#e60023', fontWeight: 'bold', fontSize: '16px', marginLeft: '6px' }}>{product.newPrice}</span>
                                 </div>
