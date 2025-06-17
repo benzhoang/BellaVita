@@ -12,6 +12,7 @@ import DiscountPage from "./pages/DiscountPage";
 import CartPage from "./pages/CartPage";
 import UpgradePage from "./pages/UpgradePage";
 import AboutUsPage from "./pages/AboutUsPage";
+import Up from './compoments/Up';
 import './App.css';
 
 // Wrapper component to conditionally render Navbar and Footer
@@ -39,6 +40,7 @@ const AppLayout = () => {
       </div>
 
       {!hideNavbarAndFooter && <Footer />}
+      {!hideNavbarAndFooter && <Up />}
     </div>
   );
 };

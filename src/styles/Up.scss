@@ -1,0 +1,19 @@
+.up-btn {
+    background: #e9e9e2cc; // màu nền nhẹ, bán trong suốt
+    color: #222;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, background 0.2s, color 0.2s;
+    border: none;
+
+    &.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &:hover {
+        background: #A4A199;
+        color: #fff;
+    }
+}
