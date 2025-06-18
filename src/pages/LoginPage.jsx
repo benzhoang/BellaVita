@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LoginPage.scss';
 import Logo from '../images/Logo.jpg';
@@ -68,7 +68,7 @@ const LoginPage = () => {
                             </label>
                         </div>
                         <p className="small mb-0">
-                            <a href="/forget">Quên mật khẩu?</a>
+                            <Link to="/forget">Quên mật khẩu?</Link>
                         </p>
                     </div>
                     <button className="btn btn-primary w-100 mb-3" onClick={handleLogin}>
@@ -88,7 +88,7 @@ const LoginPage = () => {
                     <div className="mt-3">
                         <p className="small">
                             Chưa có tài khoản?{' '}
-                            <a href="/signup">Đăng ký ngay</a>
+                            <Link to="/signup">Đăng ký ngay</Link>
                         </p>
                     </div>
                 </div>

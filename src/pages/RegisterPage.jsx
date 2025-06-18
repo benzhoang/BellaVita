@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/RegisterPage.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../images/Logo.jpg";
 
 const RegisterPage = () => {
@@ -106,10 +106,10 @@ const RegisterPage = () => {
 
           <div className="mt-3 d-flex flex-column align-items-center text-center w-100">
             <p className="small mb-1">
-              Bạn đã có tài khoản? <a href="/login">Đăng nhập</a>
+              Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
             </p>
             <p className="small">
-              Bạn đã quên mật khẩu? <a href="/forget">Quên mật khẩu</a>
+              Bạn đã quên mật khẩu? <Link to="/forget">Quên mật khẩu</Link>
             </p>
           </div>
         </div>

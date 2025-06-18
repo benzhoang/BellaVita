@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/ForgetPassPage.scss';
+import { Link } from 'react-router-dom';
 
 const ForgetPassPage = () => {
     return (
@@ -26,10 +27,10 @@ const ForgetPassPage = () => {
 
                     <div className="mt-3 d-flex flex-column align-items-center text-center w-100">
                         <p className="small mb-1">
-                            Nhớ mật khẩu của bạn? <a href="/login">Đăng nhập</a>
+                            Nhớ mật khẩu của bạn? <Link to="/login">Đăng nhập</Link>
                         </p>
                         <p className="small">
-                            Chưa có tài khoản? <a href="/signup">Đăng ký</a>
+                            Chưa có tài khoản? <Link to="/signup">Đăng ký</Link>
                         </p>
                     </div>
                 </div>
