@@ -1,36 +1,99 @@
-.register-page {
-    width: 100vw;
-    height: 100vh;
-    display: flex; // cần thiết để justify-content có tác dụng
-    justify-content: flex-end;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-color: #F5E6D3;
+.register {
+  background-color: #f5e6d3;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
 }
 
-.register-blur-box {
-    width: 50vw;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.register-box {
+  width: 500px;
+  height: auto;
+  min-height: 480px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  padding: 32px 24px;
 }
 
-.register-form-container {
-    width: 100%;
-    max-width: 360px;
+.register-container {
+  width: 100%;
+  max-width: 340px;
+  padding: 0;
+
+  a {
+    color: #81673e;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #02101e;
+      text-decoration: underline;
+    }
+  }
+}
+
+.register-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.btn.btn-primary {
+  background-color: #81673e;
+  border: none;
+  transition: background 0.2s;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  margin-top: 15px;
+
+  &:hover,
+  &:focus {
+    background-color: #02101e;
+  }
 }
 
 .google-btn {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #ddd;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  transition: background 0.2s, border 0.2s;
 
-    &:hover {
-        background-color: #f5f5f5;
-    }
+  &:hover {
+    background: #f5f5f5;
+    color: #000;
+    border-color: #81673e;
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #81673e;
+  margin: 1rem 0;
+}
+
+.register-form-container a {
+  color: #81673e;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.register-form-container a:hover {
+  color: #02101e;
+  text-decoration: underline;
 }

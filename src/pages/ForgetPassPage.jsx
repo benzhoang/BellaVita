@@ -3,34 +3,33 @@ import '../styles/ForgetPassPage.scss';
 
 const ForgetPassPage = () => {
     return (
-        <div className="register-page d-flex">
-            <div className="register-blur-box d-flex justify-content-center align-items-center">
-                <div className="register-form-container text-start">
-                    <h2 className="mb-4 fw-bold text-center">Forgot Password</h2>
+        <div className="fp-page d-flex">
+            <div className="fp-blur-box d-flex justify-content-center align-items-center">
+                <div className="fp-form-container text-start">
+                    <h2 className="mb-4 text-center">Quên mật khẩu</h2>
 
-                    <p className="text-center mb-3 small">
-                        Enter your email to receive password reset instructions.
+                    <p className="text-center mb-4 small">
+                        Nhập email của bạn để nhận hướng dẫn đặt lại mật khẩu.
                     </p>
 
-                    <label>Email</label>
                     <input
                         type="email"
-                        placeholder="Email"
+                        placeholder="Email của bạn"
                         className="form-control mb-3"
                     />
 
                     <button className="btn btn-primary w-100 mb-3">
-                        Send Reset Link
+                        Gửi liên kết
                     </button>
 
                     <hr />
 
                     <div className="mt-3 d-flex flex-column align-items-center text-center w-100">
                         <p className="small mb-1">
-                            Remember your password? <a href="/login">Login</a>
+                            Nhớ mật khẩu của bạn? <a href="/login">Đăng nhập</a>
                         </p>
                         <p className="small">
-                            Don’t have an account? <a href="/signup">Register</a>
+                            Chưa có tài khoản? <a href="/signup">Đăng ký</a>
                         </p>
                     </div>
                 </div>
