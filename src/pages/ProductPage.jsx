@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/ProductPage.scss';
 import Image from '../images/Images.webp';
 
 const ProductPage = () => {
     const itemsPerPage = 12;
-    const totalProducts = 120;
-    const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
+    const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [activeCategory, setActiveCategory] = useState('all');
 
@@ -19,24 +19,28 @@ const ProductPage = () => {
         { id: 'body', name: 'Chăm sóc body' }
     ];
 
-    const sharedProductContent = {
-        image: Image,
-        discount: "-40%",
-        title: "Bộ đôi Dưỡng Sáng Trẻ Hóa Phục Hồi Da - Niacinamide Essence & Hyaluronic Acid Essence",
-        oldPrice: "1.000.000 đ",
-        newPrice: "598.000 đ",
-        buyText: "MUA NGAY",
-        cartText: "Thêm vào giỏ hàng"
-    };
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+                setProducts(response.data || []);
+            } catch (error) {
+                console.error("Lỗi khi fetch sản phẩm:", error);
+            }
+        };
 
-    const allProducts = new Array(totalProducts).fill(null).map((_, index) => ({
-        id: index + 1,
-        ...sharedProductContent
-    }));
+        fetchProducts();
+    }, []);
 
+    // Lọc theo danh mục nếu có
+    const filteredProducts = activeCategory === 'all'
+        ? products
+        : products.filter(product => product.category === activeCategory);
+
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentProducts = allProducts.slice(indexOfFirstItem, indexOfLastItem);
+    const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
     const handleClick = (page) => {
         if (page >= 1 && page <= totalPages) {
@@ -82,7 +86,10 @@ const ProductPage = () => {
                         <button
                             key={category.id}
                             className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
-                            onClick={() => setActiveCategory(category.id)}
+                            onClick={() => {
+                                setActiveCategory(category.id);
+                                setCurrentPage(1); // Reset trang về 1 khi đổi danh mục
+                            }}
                         >
                             {category.name}
                         </button>
@@ -93,10 +100,15 @@ const ProductPage = () => {
 
                 <div className="row gx-4 gy-4">
                     {currentProducts.map((product, idx) => (
-                        <div className="col-md-3" key={idx}>
-                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', padding: '8px' }}>
+                        <div className="col-md-3" key={product.id || idx}>
+                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
                                 <div style={{ position: 'relative' }}>
-                                    <img src={product.image} alt="product" className="card-image img-fluid" style={{ maxHeight: '200px', objectFit: 'contain' }} />
+                                    <img
+                                        src={product.image || Image}
+                                        alt={product.name}
+                                        className="card-image img-fluid"
+                                        style={{ maxHeight: '200px', objectFit: 'contain' }}
+                                    />
                                     <div style={{
                                         position: 'absolute',
                                         top: '10px',
@@ -106,16 +118,19 @@ const ProductPage = () => {
                                         padding: '4px 8px',
                                         fontSize: '12px',
                                         borderRadius: '4px'
-                                    }}>{product.discount}</div>
+                                    }}>
+                                        -40%
+                                    </div>
                                 </div>
-                                <h6 className="mt-2" style={{ fontSize: '14px', marginBottom: '4px' }}>{product.title}</h6>
+                                <h6 className="mt-2" style={{ fontSize: '14px', marginBottom: '4px' }}>{product.name}</h6>
                                 <div className="mt-1" style={{ marginBottom: '4px' }}>
-                                    <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>{product.oldPrice}</span>
-                                    <span style={{ color: '#e60023', fontWeight: 'bold', fontSize: '16px', marginLeft: '6px' }}>{product.newPrice}</span>
+                                    <span style={{ color: '#e60023', fontWeight: 'bold', fontSize: '16px' }}>
+                                        {Math.round(product.price)?.toLocaleString()} đ
+                                    </span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-2">
-                                    <button className="btn btn-outline-secondary btn-sm">{product.cartText}</button>
-                                    <button className="btn btn-danger btn-sm">{product.buyText}</button>
+                                    <button className="btn btn-outline-secondary btn-sm">Thêm vào giỏ hàng</button>
+                                    <button className="btn btn-danger btn-sm">MUA NGAY</button>
                                 </div>
                             </div>
                         </div>
