@@ -13,6 +13,8 @@ import CartPage from "./pages/CartPage";
 import UpgradePage from "./pages/UpgradePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import './App.css';
+import DashboardPage from "./pages/dashboard/index";
+import AppRouter from '@/routes/index';
 
 // Wrapper component to conditionally render Navbar and Footer
 const AppLayout = () => {
@@ -35,6 +37,7 @@ const AppLayout = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/about" element={<AboutUsPage />} />
+          {/* <Route path="/admin" element={<AppRouter /> } /> */}
         </Routes>
       </div>
 
@@ -46,7 +49,13 @@ const AppLayout = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <Routes>
+        {/* Admin routes (no Navbar/Footer) */}
+        <Route path="/admin/*" element={<AppRouter />} />
+
+        {/* Customer routes (has Navbar/Footer) */}
+        <Route path="/*" element={<AppLayout />} />
+      </Routes>
     </BrowserRouter>
   );
 }
