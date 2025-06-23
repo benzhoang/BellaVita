@@ -13,6 +13,8 @@ import CartPage from "./pages/CartPage";
 import UpgradePage from "./pages/UpgradePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Up from './compoments/Up';
+import AI from './compoments/AI';
+import DetailProductPage from './pages/DetailProductPage';
 import './App.css';
 
 // Wrapper component to conditionally render Navbar and Footer
@@ -36,11 +38,14 @@ const AppLayout = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/product/:id" element={<DetailProductPage />} />
+
         </Routes>
       </div>
 
       {!hideNavbarAndFooter && <Footer />}
       {!hideNavbarAndFooter && <Up />}
+      {!hideNavbarAndFooter && <AI />}
     </div>
   );
 };

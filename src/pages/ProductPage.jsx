@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/ProductPage.scss';
 import Image from '../images/Images.webp';
@@ -9,6 +10,7 @@ const ProductPage = () => {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [activeCategory, setActiveCategory] = useState('all');
+    const navigate = useNavigate();
 
     const categories = [
         { id: 'all', name: 'Tất cả' },
@@ -32,7 +34,6 @@ const ProductPage = () => {
         fetchProducts();
     }, []);
 
-    // Lọc theo danh mục nếu có
     const filteredProducts = activeCategory === 'all'
         ? products
         : products.filter(product => product.category === activeCategory);
@@ -88,7 +89,7 @@ const ProductPage = () => {
                             className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
                             onClick={() => {
                                 setActiveCategory(category.id);
-                                setCurrentPage(1); // Reset trang về 1 khi đổi danh mục
+                                setCurrentPage(1);
                             }}
                         >
                             {category.name}
@@ -101,7 +102,16 @@ const ProductPage = () => {
                 <div className="row gx-4 gy-4">
                     {currentProducts.map((product, idx) => (
                         <div className="col-md-3" key={product.id || idx}>
-                            <div className="custom-card text-center p-2" style={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+                            <div
+                                className="custom-card text-center p-2"
+                                style={{
+                                    backgroundColor: '#fff',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => navigate(`/product/${product.product_id}`)}
+                            >
                                 <div style={{ position: 'relative' }}>
                                     <img
                                         src={product.image || Image}
@@ -129,15 +139,27 @@ const ProductPage = () => {
                                     </span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-2">
-                                    <button className="btn btn-outline-secondary btn-sm">Thêm vào giỏ hàng</button>
-                                    <button className="btn btn-danger btn-sm">MUA NGAY</button>
+                                    <button
+                                        className="btn btn-outline-secondary btn-sm"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                    <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            navigate(`/product/${product.product_id}`);
+                                        }}
+                                    >
+                                        MUA NGAY
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Pagination */}
                 <div className="pagination-container mt-5 d-flex justify-content-center">
                     <nav>
                         <ul className="pagination">
