@@ -44,6 +44,8 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userEmail');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('orderId');
         setIsLoggedIn(false);
         setUserEmail('');
         navigate('/');
@@ -76,6 +78,17 @@ const Navbar = () => {
 
                 {/* Centered links */}
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <div className="input-group search-box d-lg-none mt-3 mb-2">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search..."
+                            ref={searchRef}
+                        />
+                        <button className="btn btn-search" onClick={handleSearch}>
+                            <i className="bi bi-search text-white"></i>
+                        </button>
+                    </div>
                     <ul className="navbar-nav gap-3">
                         <li className="nav-item"><Link className="nav-link" to="/">Trang chủ</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/upgrade">Nâng cấp</Link></li>
@@ -88,7 +101,7 @@ const Navbar = () => {
 
                 {/* Right: search + user info/buttons */}
                 <div className="d-flex align-items-center gap-2">
-                    <div className="input-group search-box">
+                    <div className="input-group search-box d-none d-lg-flex">
                         <input
                             type="text"
                             className="form-control"

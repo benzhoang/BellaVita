@@ -153,8 +153,14 @@
                 }
             }
         }
+    }
 
-        @media (max-width: 768px) {
+    @media (max-width: 768px) {
+        .section-heading {
+            font-size: 2rem;
+        }
+
+        .feature-item {
             padding: 2rem;
 
             .feature-title {
@@ -169,6 +175,25 @@
 
             .image-wrapper img {
                 height: 250px;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        
+        .section-heading {
+            font-size: 1.8rem;
+        }
+
+        .feature-item {
+            .feature-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-text {
+                font-size: 1rem;
+                line-height: 1.6;
+                max-width: 100%;
             }
         }
     }

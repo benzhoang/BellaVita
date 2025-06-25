@@ -212,3 +212,151 @@
         }
     }
 }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .custom-navbar .container-fluid {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .custom-navbar .navbar-toggler {
+        display: block;
+        order: 1;
+        margin-left: 0;
+    }
+
+    .custom-navbar .navbar-brand {
+        order: 2;
+        margin-left: 1rem;
+    }
+
+    .custom-navbar .d-flex.align-items-center.gap-2 {
+        order: 3;
+        margin-left: auto;
+    }
+
+    .custom-navbar .navbar-collapse {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #A4A199;
+        z-index: 1021;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-navbar .navbar-collapse.show {
+        display: flex !important;
+    }
+
+    .custom-navbar .navbar-collapse .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        gap: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .custom-navbar .navbar-collapse .search-box {
+        width: 90%;
+        max-width: 400px;
+        margin-bottom: 1rem;
+    }
+
+    .custom-navbar .btn-login,
+    .custom-navbar .btn-signup {
+        min-width: auto;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .custom-navbar .container-fluid {
+        display: flex;
+        flex-wrap: nowrap; /* Prevent items from wrapping */
+        align-items: center;
+    }
+
+    .custom-navbar .navbar-toggler {
+        order: 1; /* Toggler first */
+    }
+
+    .custom-navbar .navbar-brand {
+        order: 2; /* Brand second */
+        margin-left: 1rem; /* Space between toggler and brand */
+    }
+    
+    .custom-navbar .d-flex.align-items-center.gap-2 {
+        order: 3; /* Right-side items third */
+        margin-left: auto; /* Push this group to the far right */
+    }
+
+    /* Make the collapsed menu an overlay and center its content */
+    .custom-navbar .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #A4A199; /* Match navbar background */
+        z-index: 1021; /* Ensure it's above other content */
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-navbar .navbar-collapse .navbar-nav {
+        width: 100%;
+        text-align: center;
+    }
+
+    .custom-navbar .navbar-collapse .search-box {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .custom-navbar .btn-login,
+    .custom-navbar .btn-signup {
+        min-width: auto;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .custom-navbar .navbar-collapse {
+        display: none !important;
+    }
+    .custom-navbar .navbar-collapse.show {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-navbar .navbar-brand {
+        display: none; /* Hide brand on very small screens to avoid clutter */
+    }
+    
+    .custom-navbar .btn-login,
+    .custom-navbar .btn-signup {
+        min-width: auto;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .custom-navbar .navbar-collapse {
+        display: none !important;
+    }
+    .custom-navbar .navbar-collapse.show {
+        display: flex !important;
+    }
+}

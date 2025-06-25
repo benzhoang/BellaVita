@@ -26,7 +26,7 @@ const ForgetPassPage = () => {
                     <hr />
 
                     <div className="mt-3 d-flex flex-column align-items-center text-center w-100">
-                        <p className="small mb-1">
+                        <p className="small mb-2">
                             Nhớ mật khẩu của bạn? <Link to="/login">Đăng nhập</Link>
                         </p>
                         <p className="small">

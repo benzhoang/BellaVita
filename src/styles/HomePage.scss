@@ -325,3 +325,137 @@
 
 
 
+
+@media (max-width: 1024px) {
+  .homepage {
+    .main-banner {
+      padding: 50px 100px;
+
+      .banner-content {
+        .text-section {
+          .title {
+            font-size: 2.4rem;
+          }
+        }
+        .product-image img {
+          max-height: 350px;
+        }
+      }
+    }
+
+    .carousel-wrapper {
+      padding: 0 80px;
+      .image {
+        height: 500px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage {
+    .main-banner {
+      padding: 50px;
+
+      .banner-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+
+        .text-section {
+          padding-right: 0;
+        }
+
+        .product-image img {
+          max-height: 300px;
+        }
+
+        .product-detail-box {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .carousel-wrapper {
+      padding: 0 50px;
+      .image {
+        height: 400px;
+      }
+    }
+
+    .custom-carousel .carousel-item .d-flex .custom-card-link {
+      width: calc(50% - 1.5rem);
+    }
+    
+    .custom-carousel .carousel-item .d-flex {
+        flex-wrap: wrap;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage {
+    padding-left: 0;
+    padding-right: 0;
+
+    .section-header {
+      font-size: 1.5rem;
+      padding-top: 30px;
+    }
+
+    .main-banner {
+      padding: 30px 20px;
+
+      .banner-content .text-section {
+        .title {
+          font-size: 2rem;
+        }
+        .desc {
+          font-size: 0.9rem;
+        }
+      }
+
+      .product-image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 16px;
+      }
+      .product-image img {
+        max-height: 150px;
+        object-fit: contain;
+      }
+
+      .product-detail-box {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+
+    .carousel-wrapper {
+      padding: 0 15px;
+      .image {
+        height: 250px;
+      }
+    }
+
+    .custom-carousel {
+      .custom-carousel-control {
+        display: none;
+      }
+
+      .carousel-item .d-flex .custom-card-link {
+        width: 100%;
+      }
+
+      .custom-card .card-body .card-title {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+
+
+
+
+

@@ -18,24 +18,41 @@
                 }
 
                 .carousel-caption {
-                    background: rgba(0, 0, 0, 0.5);
-                    padding: 1rem;
-                    border-radius: 5px;
+                    background: rgba(0, 0, 0, 0.6);
+                    padding: 1.5rem 2rem;
+                    border-radius: 10px;
                     max-width: 600px;
                     margin: 0 auto;
-                    bottom: 20px;
+                    bottom: 40px;
+                    text-align: center;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
                     h2 {
-                        font-size: 2rem;
-                        font-weight: 600;
-                        margin-bottom: 0.5rem;
+                        font-size: 2.2rem;
+                        font-weight: 700;
+                        margin-bottom: 0.8rem;
                         color: #fff;
+                        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
                     }
 
                     p {
-                        font-size: 1.1rem;
-                        color: #fff;
-                        margin-bottom: 0;
+                        font-size: 1.2rem;
+                        color: #f1f1f1;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .btn {
+                        background-color: #ff4757;
+                        color: white;
+                        border: none;
+                        padding: 0.8rem 2rem;
+                        font-weight: 600;
+                        border-radius: 50px;
+                        transition: background-color 0.3s ease;
+
+                        &:hover {
+                            background-color: #e04250;
+                        }
                     }
                 }
             }
@@ -203,58 +220,248 @@
                 }
             }
         }
+
+        .discount-section {
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 1.5rem;
+            }
+        }
     }
 }
 
 @media (max-width: 768px) {
     .discount-page {
+        padding: 1rem 0;
+
         .carousel-section {
+            margin-top: 60px;
+            margin-bottom: 2rem;
+
             .carousel-wrapper {
                 .carousel-item {
                     height: 350px;
 
                     .carousel-caption {
                         padding: 1.5rem;
-                        bottom: 40px;
+                        bottom: 30px;
+                        max-width: 90%;
 
                         h2 {
-                            font-size: 2rem;
+                            font-size: 1.8rem;
+                            margin-bottom: 0.5rem;
                         }
 
                         p {
-                            font-size: 1.1rem;
+                            font-size: 1rem;
+                            margin-bottom: 1rem;
+                        }
+
+                        .btn {
+                            padding: 0.6rem 1.5rem;
+                            font-size: 0.9rem;
                         }
                     }
                 }
 
                 .carousel-control-prev,
                 .carousel-control-next {
-                    width: 45px;
-                    height: 45px;
-                    margin: 0 15px;
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 10px;
+
+                    .carousel-control-prev-icon,
+                    .carousel-control-next-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+
+                .carousel-indicators {
+                    bottom: 5px;
+
+                    button {
+                        width: 8px;
+                        height: 8px;
+                        margin: 0 3px;
+                    }
+                }
+            }
+        }
+
+        .discount-section {
+            padding: 2rem 0;
+
+            .section-header {
+                margin-bottom: 2rem;
+                padding: 0 1rem;
+
+                .section-title {
+                    font-size: 2rem;
+                    margin-bottom: 0.8rem;
+                }
+
+                .section-description {
+                    font-size: 1rem;
+                    max-width: 100%;
+                }
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+                padding: 0 1rem;
+
+                .card-item {
+                    .card-image {
+                        height: 180px;
+
+                        .discount-badge {
+                            padding: 0.4rem 0.8rem;
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    .card-content {
+                        padding: 1.2rem;
+
+                        .card-title {
+                            font-size: 1.1rem;
+                        }
+
+                        .card-info {
+                            flex-direction: column;
+                            gap: 0.5rem;
+                            font-size: 0.85rem;
+                        }
+
+                        .card-description {
+                            font-size: 0.9rem;
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     .discount-page {
+        padding: 0.5rem 0;
+
         .carousel-section {
+            margin-top: 50px;
+            margin-bottom: 1.5rem;
+
             .carousel-wrapper {
                 .carousel-item {
-                    height: 300px;
+                    height: 250px;
 
                     .carousel-caption {
                         padding: 1rem;
-                        bottom: 30px;
+                        bottom: 20px;
+                        max-width: 95%;
 
                         h2 {
-                            font-size: 1.8rem;
+                            font-size: 1.4rem;
+                            margin-bottom: 0.3rem;
                         }
 
                         p {
+                            font-size: 0.9rem;
+                            margin-bottom: 0.8rem;
+                        }
+
+                        .btn {
+                            padding: 0.5rem 1.2rem;
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+
+                .carousel-control-prev,
+                .carousel-control-next {
+                    width: 35px;
+                    height: 35px;
+                    margin: 0 5px;
+
+                    .carousel-control-prev-icon,
+                    .carousel-control-next-icon {
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+
+                .carousel-indicators {
+                    bottom: 3px;
+
+                    button {
+                        width: 6px;
+                        height: 6px;
+                        margin: 0 2px;
+                    }
+                }
+            }
+        }
+
+        .discount-section {
+            padding: 1.5rem 0;
+
+            .section-header {
+                margin-bottom: 1.5rem;
+                padding: 0 0.5rem;
+
+                .section-title {
+                    font-size: 1.6rem;
+                    margin-bottom: 0.6rem;
+                }
+
+                .section-description {
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 0.5rem;
+
+                .card-item {
+                    .card-image {
+                        height: 160px;
+
+                        .discount-badge {
+                            top: 10px;
+                            right: 10px;
+                            padding: 0.3rem 0.6rem;
+                            font-size: 0.8rem;
+                            border-radius: 15px;
+                        }
+                    }
+
+                    .card-content {
+                        padding: 1rem;
+
+                        .card-title {
                             font-size: 1rem;
+                            margin-bottom: 0.8rem;
+                        }
+
+                        .card-info {
+                            flex-direction: column;
+                            gap: 0.4rem;
+                            font-size: 0.8rem;
+                            margin-bottom: 0.8rem;
+
+                            span {
+                                gap: 0.3rem;
+                            }
+                        }
+
+                        .card-description {
+                            font-size: 0.85rem;
+                            line-height: 1.4;
                         }
                     }
                 }

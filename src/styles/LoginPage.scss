@@ -21,12 +21,40 @@
   align-items: center;
   border-radius: 18px;
   padding: 32px 24px;
+
+  // Responsive for tablets (max-width: 768px)
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 450px;
+    min-height: 450px;
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  // Responsive for mobile phones (max-width: 480px)
+  @media (max-width: 480px) {
+    width: 95%;
+    max-width: 350px;
+    min-height: 420px;
+    padding: 20px;
+    border-radius: 12px;
+  }
 }
 
 .login-form-container {
   width: 100%;
   max-width: 340px;
   padding: 0;
+
+  // Responsive for tablets (max-width: 768px)
+  @media (max-width: 768px) {
+    max-width: 320px;
+  }
+
+  // Responsive for mobile phones (max-width: 480px)
+  @media (max-width: 480px) {
+    max-width: 280px;
+  }
 
   a {
     color: #81673e;
@@ -78,4 +106,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   margin-bottom: 16px;
   background: #fff;
+
+  // Responsive for tablets (max-width: 768px)
+  @media (max-width: 768px) {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 14px;
+  }
+
+  // Responsive for mobile phones (max-width: 480px)
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
 }

@@ -651,32 +651,6 @@
     }
 }
 
-.cart-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #fff;
-    border-left: 4px solid #28a745;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 15px 20px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out forwards;
-
-    .success-icon {
-        color: #28a745;
-        font-size: 24px;
-        margin-right: 10px;
-    }
-
-    span {
-        color: #333;
-        font-weight: 500;
-    }
-}
-
 .loading-container,
 .error-container,
 .not-found-container {
@@ -703,18 +677,6 @@
         width: 3rem;
         height: 3rem;
         margin-bottom: 20px;
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
     }
 }
 

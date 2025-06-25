@@ -243,3 +243,69 @@
         border-top: 1px solid #aaa;
     }
 }
+
+@media (max-width: 768px) {
+    .cart-page {
+        padding-top: 100px;
+        padding-left: 40px;
+        padding-right: 40px;
+
+        .info-box,
+        .map {
+            max-width: 100%;
+        }
+
+        .invoice-section {
+            th:nth-child(1),
+            td:nth-child(1) {
+                width: 35%;
+            }
+
+            th:nth-child(2),
+            td:nth-child(2) {
+                width: 25%;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-page {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 100px;
+
+        .info-box {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .invoice-section {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+
+            table {
+                width: 100%;
+                min-width: 400px;
+            }
+        }
+    }
+
+    .summary-section {
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+
+            div:nth-child(2),
+            div:nth-child(3) {
+                display: none;
+            }
+        }
+    }
+
+    .modal {
+        width: 90vw;
+        max-width: 320px;
+    }
+}

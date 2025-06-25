@@ -3,17 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/DetailProductPage.scss';
 import { FaStar, FaRegStar, FaShoppingCart, FaHeart, FaShare } from 'react-icons/fa';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DetailProductPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState('description');
-    const [showNotification, setShowNotification] = useState(false);
+
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -23,7 +23,6 @@ const DetailProductPage = () => {
                 setLoading(false);
             } catch (error) {
                 console.error("Lỗi khi fetch chi tiết sản phẩm:", error);
-                setError("Không thể tải thông tin sản phẩm");
                 setLoading(false);
             }
         };
@@ -35,9 +34,49 @@ const DetailProductPage = () => {
         setQuantity(prev => Math.max(1, prev + change));
     };
 
-    const handleAddToCart = () => {
-        setShowNotification(true);
-        setTimeout(() => setShowNotification(false), 3000);
+    // Function to create an order (add to cart)
+    const createOrder = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const token = localStorage.getItem('token');
+
+            if (!userId) {
+                toast.error('Không tìm thấy userId hợp lệ.', { autoClose: 2000 });
+                return null;
+            }
+
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/orders`,
+                {
+                    user_id: userId,
+                    payment_method: "VNPAY",
+                    orderItems: [{ product_id: id, quantity: quantity }]
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            localStorage.setItem('orderId', response.data.order_id);
+            return response.data;
+        } catch (error) {
+            console.error('Order API error:', error);
+            toast.error('Không thể thêm sản phẩm vào giỏ hàng.', { autoClose: 2000 });
+            return null;
+        }
+    };
+
+    const handleBuyNow = async () => {
+        const result = await createOrder();
+        if (result) {
+            toast.success('Đã thêm sản phẩm vào giỏ hàng!', { autoClose: 1000 });
+            setTimeout(() => navigate('/cart'), 1200);
+        }
+    };
+
+    // Thêm hàm handleAddToCart để sửa lỗi
+    const handleAddToCart = async () => {
+        const result = await createOrder();
+        if (result) {
+            toast.success('Đã thêm sản phẩm vào giỏ hàng!', { autoClose: 1000 });
+        }
     };
 
     if (loading) {
@@ -47,20 +86,6 @@ const DetailProductPage = () => {
                     <span className="visually-hidden">Đang tải...</span>
                 </div>
                 <p>Đang tải thông tin sản phẩm...</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="error-container">
-                <div className="alert alert-danger" role="alert">
-                    <i className="fas fa-exclamation-circle me-2"></i>
-                    {error}
-                </div>
-                <button className="btn btn-outline-primary" onClick={() => navigate('/product')}>
-                    Quay lại trang sản phẩm
-                </button>
             </div>
         );
     }
@@ -88,12 +113,17 @@ const DetailProductPage = () => {
 
     return (
         <div className="detail-product-page">
-            {showNotification && (
-                <div className="cart-notification">
-                    <IoMdCheckmarkCircleOutline className="success-icon" />
-                    <span>Đã thêm sản phẩm vào giỏ hàng!</span>
-                </div>
-            )}
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 
             <div className="container">
                 <nav aria-label="breadcrumb" className="product-breadcrumb">
@@ -173,9 +203,9 @@ const DetailProductPage = () => {
 
                                     <div className="action-buttons">
                                         <button className="btn btn-add-to-cart" onClick={handleAddToCart}>
-                                            <FaShoppingCart /> Thêm vào giỏ
+                                            <FaShoppingCart /> Thêm vào giỏ hàng
                                         </button>
-                                        <button className="btn btn-buy-now">
+                                        <button className="btn btn-buy-now" onClick={handleBuyNow}>
                                             MUA NGAY
                                         </button>
                                     </div>

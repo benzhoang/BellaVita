@@ -23,7 +23,6 @@ const RegisterPage = () => {
         name,
         email,
         password,
-        social_provider: "local",
       });
       alert("Registration successful! Please login.");
 

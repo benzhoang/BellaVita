@@ -17,9 +17,12 @@ const LoginPage = () => {
                 { email, password }
             );
 
-            const { token } = response.data;
+            console.log(response.data);
+
+            const { token, userId } = response.data;
             localStorage.setItem('token', token);
-            localStorage.setItem('userEmail', email); 
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userId', userId);
             alert('Login successful!');
 
             navigate('/');

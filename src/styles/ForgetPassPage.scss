@@ -55,3 +55,46 @@
     border-color: #81673e;
   }
 }
+
+// Responsive styles for tablets (max-width: 768px)
+@media (max-width: 768px) {
+  .fp-blur-box {
+    width: 90%;
+    max-width: 450px;
+    padding: 24px 20px;
+    min-height: 450px;
+  }
+
+  .fp-form-container {
+    max-width: 320px;
+  }
+
+  .google-btn {
+    font-size: 0.95rem;
+  }
+}
+
+// Responsive styles for mobile phones (max-width: 480px)
+@media (max-width: 480px) {
+  .fp-page {
+    padding: 16px;
+  }
+
+  .fp-blur-box {
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    min-height: 420px;
+    border-radius: 12px;
+  }
+
+  .fp-form-container {
+    max-width: 100%;
+  }
+
+  .google-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+  }
+}
