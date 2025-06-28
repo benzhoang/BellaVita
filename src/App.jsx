@@ -16,6 +16,11 @@ import Up from './compoments/Up';
 import AI from './compoments/AI';
 import DetailProductPage from './pages/DetailProductPage';
 import './App.css';
+import AdminLayout from "./compoments/AdminLayout";
+import Dashboard from "./pages/Dashboard";
+import UserList from "./pages/UserList";
+import ProductList from "./pages/ProductList";
+import OrderList from "./pages/OrderList";
 
 // Wrapper component to conditionally render Navbar and Footer
 const AppLayout = () => {
@@ -40,6 +45,13 @@ const AppLayout = () => {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/product/:id" element={<DetailProductPage />} />
 
+          //Admin dashboard
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="orders" element={<OrderList />} />
+          </Route>
         </Routes>
       </div>
 
