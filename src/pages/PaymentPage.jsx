@@ -19,12 +19,12 @@ const PaymentPage = () => {
         try {
             // Chuẩn bị dữ liệu thanh toán
             const paymentData = {
-                amount: localStorage.getItem('totalAmount') || '10000', // Lấy số tiền từ localStorage hoặc mặc định
-                orderInfo: `Thanh toán đơn hàng ${orderId}`,
-                orderType: 'billpayment',
-                bankCode: 'NCB', // Có thể để trống để hiển thị tất cả ngân hàng
-                language: 'vn',
-                returnUrl: `${window.location.origin}/payment-success`, // URL callback khi thanh toán xong
+                // amount: localStorage.getItem('totalAmount') || '10000', // Lấy số tiền từ localStorage hoặc mặc định
+                orderDescription: `Thanh toán đơn hàng ${orderId}`,
+                // orderType: 'billpayment',
+                // bankCode: 'NCB', // Có thể để trống để hiển thị tất cả ngân hàng
+                // language: 'vn',
+                // returnUrl: `${window.location.origin}/payment-success`, // URL callback khi thanh toán xong
                 orderId: orderId
             };
 

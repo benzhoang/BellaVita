@@ -40,7 +40,7 @@ const HomePage = () => {
             <div className={`carousel-item ${slideIndex === 0 ? "active" : ""}`} key={slideIndex}>
               <div className="d-flex gap-3 justify-content-center px-3">
                 {slide.map((item) => (
-                  <Link to={`/${basePath}/${item.id}`} className="custom-card-link" key={item.id}>
+                  <Link to={`/product/${item.product_id}`} className="custom-card-link" key={item.id}>
                     <div className="custom-card">
                       <div className="discount-tag">-40%</div>
                       <img src={item.image || Image} alt="card-img" className="card-image" />
