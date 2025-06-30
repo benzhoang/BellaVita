@@ -16,6 +16,7 @@ import Up from './compoments/Up';
 import AI from './compoments/AI';
 import DetailProductPage from './pages/DetailProductPage';
 import PaymentPage from './pages/PaymentPage';
+import PaymentResult from "./pages/PaymentResult";
 import './App.css';
 
 // Wrapper component to conditionally render Navbar and Footer
@@ -41,6 +42,7 @@ const AppLayout = () => {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/product/:id" element={<DetailProductPage />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment-success" element={<PaymentResult />} />
         </Routes>
       </div>
 

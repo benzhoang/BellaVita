@@ -1,0 +1,16 @@
+.payment-result-container {
+    min-height: 80vh;
+    background: #f8f9fa;
+}
+
+.payment-result-card {
+    border-radius: 16px;
+    background: #fff;
+    max-width: 400px;
+    width: 100%;
+}
+
+.payment-result-card .fa-check-circle {
+    font-size: 4rem;
+    color: #28a745;
+}
