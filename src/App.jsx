@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './compoments/Navbar';
-import Footer from './compoments/Footer';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -12,17 +12,23 @@ import DiscountPage from "./pages/DiscountPage";
 import CartPage from "./pages/CartPage";
 import UpgradePage from "./pages/UpgradePage";
 import AboutUsPage from "./pages/AboutUsPage";
-import Up from './compoments/Up';
-import AI from './compoments/AI';
+import Up from './components/Up';
+import AI from './components/AI';
 import DetailProductPage from './pages/DetailProductPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResult from "./pages/PaymentResult";
+
+import AdminLayout from "./layout/AdminLayout";
+import Dashboard from "./pages/admin/DashboardPage";
+import UserList from "./pages/admin/UserListPage";
+import ProductList from "./pages/admin/ProductListPage";
+import OrderList from "./pages/admin/OrderListPage";
 import './App.css';
 
 // Wrapper component to conditionally render Navbar and Footer
 const AppLayout = () => {
   const location = useLocation();
-  const hideNavbarAndFooter = ["/login", "/signup", "/forget"].includes(location.pathname);
+  const hideNavbarAndFooter = ["/login", "/signup", "/forget", '/admin', '/admin/users', '/admin/products', '/admin/orders'].includes(location.pathname);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
@@ -43,6 +49,14 @@ const AppLayout = () => {
           <Route path="/product/:id" element={<DetailProductPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/payment-result" element={<PaymentResult />} />
+
+          {/* Admin dashboard  */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="orders" element={<OrderList />} />
+          </Route>
         </Routes>
       </div>
 

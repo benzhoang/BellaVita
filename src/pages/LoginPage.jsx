@@ -19,13 +19,18 @@ const LoginPage = () => {
 
             console.log(response.data);
 
-            const { token, userId } = response.data;
+            const { token, userId, userName } = response.data;
             localStorage.setItem('token', token);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userId', userId);
             alert('Login successful!');
-
-            navigate('/');
+            if (userName == 'Admin') {
+                localStorage.setItem('userEmail2', email);
+                localStorage.setItem('userId2', userId);
+                navigate('/admin');
+            } else {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userId', userId);
+                navigate('/');
+            }
         } catch (err) {
             console.error(err);
             setError('Login failed. Please check your credentials.');
