@@ -4,6 +4,13 @@
     right: 20px;
     z-index: 1000;
 
+    .ai-content {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        flex-direction: row-reverse;
+    }
+
     .bot-button {
         background-color: #f1f1f1;
         border-radius: 50%;
@@ -14,6 +21,7 @@
         align-items: center;
         cursor: pointer;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
 
         img {
             width: 30px;
@@ -22,13 +30,13 @@
     }
 
     .chatbox {
-        width: 320px;
+        width: 450px;
+        height: 400px;
         background-color: #f7f3eb;
         border-radius: 12px;
         overflow: hidden;
-        position: absolute;
-        bottom: 80px;
-        right: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: -130px;
 
         .chat-header {
             background-color: #4b2e35;
@@ -43,7 +51,7 @@
 
         .chat-body {
             background-color: #f7f3eb;
-            max-height: 250px;
+            height: 250px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
