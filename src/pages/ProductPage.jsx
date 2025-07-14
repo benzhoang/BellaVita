@@ -8,35 +8,36 @@ const ProductPage = () => {
     const itemsPerPage = 12;
 
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [activeCategory, setActiveCategory] = useState('all');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const categories = [
-        { id: 'all', name: 'Tất cả' },
-        { id: 'makeup', name: 'Trang điểm' },
-        { id: 'skincare', name: 'Chăm sóc da' },
-        { id: 'personal', name: 'Chăm sóc cá nhân' },
-        { id: 'hair', name: 'Chăm sóc tóc' },
-        { id: 'body', name: 'Chăm sóc body' }
-    ];
-
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
-                setProducts(response.data || []);
+                setLoading(true);
+                // Fetch categories
+                const categoriesResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/categories`);
+                setCategories(categoriesResponse.data || []);
+
+                // Fetch products
+                const productsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+                setProducts(productsResponse.data || []);
             } catch (error) {
-                console.error("Lỗi khi fetch sản phẩm:", error);
+                console.error("Lỗi khi fetch dữ liệu:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchProducts();
+        fetchData();
     }, []);
 
     const filteredProducts = activeCategory === 'all'
         ? products
-        : products.filter(product => product.category === activeCategory);
+        : products.filter(product => product.category_id === parseInt(activeCategory));
 
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -79,16 +80,38 @@ const ProductPage = () => {
         );
     };
 
+    if (loading) {
+        return (
+            <div className="productpage container py-5" style={{ marginTop: '60px', paddingLeft: '40px', paddingRight: '40px' }}>
+                <div className="text-center">
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Đang tải...</span>
+                    </div>
+                    <p className="mt-2">Đang tải dữ liệu...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="productpage container py-5" style={{ marginTop: '60px', paddingLeft: '40px', paddingRight: '40px' }}>
             <div className="section mb-5">
                 <div className="category-tabs d-flex justify-content-center gap-3 mb-5 flex-wrap">
+                    <button
+                        className={`category-btn ${activeCategory === 'all' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveCategory('all');
+                            setCurrentPage(1);
+                        }}
+                    >
+                        Tất cả
+                    </button>
                     {categories.map((category) => (
                         <button
-                            key={category.id}
-                            className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
+                            key={category.category_id}
+                            className={`category-btn ${activeCategory === category.category_id.toString() ? 'active' : ''}`}
                             onClick={() => {
-                                setActiveCategory(category.id);
+                                setActiveCategory(category.category_id.toString());
                                 setCurrentPage(1);
                             }}
                         >
