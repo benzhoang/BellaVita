@@ -107,46 +107,46 @@
         }
     }
 
-    /* Modal Popup */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 40%;
-        /* Adjusted to position slightly above center for dropdown effect */
-        left: 50%;
-        transform: translate(-50%, -100%);
-        /* Start off-screen above */
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        width: 400px;
-        height: 140px;
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
-        /* Animation for sliding effect */
+ /* Modal Popup */
+ .modal {
+    display: none;
+    position: fixed;
+    top: 40%;
+    /* Adjusted to position slightly above center for dropdown effect */
+    left: 50%;
+    transform: translate(-50%, -100%);
+    /* Start off-screen above */
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px;
+    height: 140px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    /* Animation for sliding effect */
 
+    &.active {
+        display: block;
+        transform: translate(-50%, 0);
+        /* Slide down to position */
+    }
+
+    &.shipping-modal {
         &.active {
-            display: block;
             transform: translate(-50%, 0);
-            /* Slide down to position */
+            /* Slide down for shipping modal */
         }
+    }
 
-        &.shipping-modal {
-            &.active {
-                transform: translate(-50%, 0);
-                /* Slide down for shipping modal */
-            }
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
+    .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
 
         .modal-content {
             display: flex;
@@ -154,6 +154,7 @@
             justify-content: center;
             height: 100%;
             gap: 10px;
+            border: none;
         }
 
         select {

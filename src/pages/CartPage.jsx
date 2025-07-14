@@ -215,8 +215,8 @@ const CartPage = () => {
                             <div className="summary-row">
                                 <div></div>
                                 <div><strong>Phương thức vận chuyển</strong></div>
-                                <div><strong>Nhanh</strong></div>
-                                <div className="text-end"><a href="#" onClick={() => { setIsShippingPopupOpen(true); setTempShippingMethod(shippingMethod); }}>Thay đổi</a></div>
+                                <div><strong>{shippingMethod}</strong></div>
+                                <div className="text-end"><a href="#" onClick={(e) => { e.preventDefault(); setIsShippingPopupOpen(true); setTempShippingMethod(shippingMethod); }}>Thay đổi</a></div>
                                 <div></div>
                                 <div>16.500đ</div>
                                 <div></div>
@@ -250,25 +250,28 @@ const CartPage = () => {
                 )}
             </div>
 
-            <div className={`modal-backdrop ${isDiscountPopupOpen || isShippingPopupOpen ? 'active' : ''}`} onClick={() => { setIsDiscountPopupOpen(false); setIsShippingPopupOpen(false); setErrorMessage(""); }}></div>
-
+            <div className={`modal-backdrop ${isDiscountPopupOpen ? 'active' : ''}`} onClick={() => { setIsDiscountPopupOpen(false); setErrorMessage(""); }}>
             <div className={`modal ${isDiscountPopupOpen ? 'active' : ''}`}>
-                <span className="close-btn" onClick={() => { setIsDiscountPopupOpen(false); setErrorMessage(""); }}>×</span>
-                <h4>Nhập mã giảm giá</h4>
-                <input
-                    type="text"
-                    value={discountCode}
-                    onChange={(e) => setDiscountCode(e.target.value)}
-                    placeholder="Nhập mã..."
-                />
-                <div className={`error ${errorMessage ? 'active' : ''}`}>{errorMessage}</div>
-                <button onClick={handleDiscountSubmit}>Xác nhận</button>
-                <button onClick={() => { setIsDiscountPopupOpen(false); setErrorMessage(""); }}>Hủy</button>
+                <div className='modal-content'>
+                    <h4>Nhập mã giảm giá</h4>
+                    <input
+                        type="text"
+                        value={discountCode}
+                        onChange={(e) => setDiscountCode(e.target.value)}
+                        placeholder="Nhập mã..."
+                    />
+                    <div className={`error ${errorMessage ? 'active' : ''}`}>{errorMessage}</div>
+                    <div className='button-container'>
+                        <button className="fast-btn" onClick={handleDiscountSubmit}>Xác nhận</button>
+                        <button className="slow-btn" onClick={() => { setIsDiscountPopupOpen(false); setErrorMessage(""); }}>Hủy</button>
+                    </div>
+                </div>
+            </div>
             </div>
 
-            <div className={`modal shipping-modal ${isShippingPopupOpen ? 'active' : ''}`}>
-                <span className="close-btn" onClick={handleShippingCancel}>×</span>
-                <div className="modal-content">
+            <div className={`modal-backdrop ${ isShippingPopupOpen ? 'active' : ''}`} onClick={() => { setIsShippingPopupOpen(false); setErrorMessage(""); }}>
+            <div className={`modal shipping-modal ${isShippingPopupOpen ? 'active' : ''}`} onClick={e => e.stopPropagation()}>
+                <div className='modal-content'>
                     <h4>Chọn phương thức vận chuyển</h4>
                     <select
                         value={tempShippingMethod}
@@ -283,6 +286,8 @@ const CartPage = () => {
                     </div>
                 </div>
             </div>
+        </div>
+          
         </div >
     );
 };
