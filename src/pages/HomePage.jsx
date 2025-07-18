@@ -43,7 +43,7 @@ const HomePage = () => {
                   <Link to={`/product/${item.product_id}`} className="custom-card-link" key={item.id}>
                     <div className="custom-card">
                       <div className="discount-tag">-40%</div>
-                      <img src={item.image || Image} alt="card-img" className="card-image" />
+                      <img src={item.image_url || Image} alt="card-img" className="card-image" />
                       <div className="card-body">
                         <p className="card-title">{item.name}</p>
                         <div className="price-wrapper">

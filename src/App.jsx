@@ -17,6 +17,7 @@ import AI from './components/AI';
 import DetailProductPage from './pages/DetailProductPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResult from "./pages/PaymentResult";
+import QRPage from './pages/QRPage';
 
 import AdminLayout from "./layout/AdminLayout";
 import Dashboard from "./pages/admin/DashboardPage";
@@ -49,6 +50,7 @@ const AppLayout = () => {
           <Route path="/product/:id" element={<DetailProductPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/payment-result" element={<PaymentResult />} />
+          <Route path="/qr" element={<QRPage />} />
 
           {/* Admin dashboard  */}
           <Route path="/admin" element={<AdminLayout />}>

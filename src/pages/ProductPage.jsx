@@ -137,7 +137,7 @@ const ProductPage = () => {
                             >
                                 <div style={{ position: 'relative' }}>
                                     <img
-                                        src={product.image || Image}
+                                        src={product.image_url || Image}
                                         alt={product.name}
                                         className="card-image img-fluid"
                                         style={{ maxHeight: '200px', objectFit: 'contain' }}

@@ -140,7 +140,7 @@ const DetailProductPage = () => {
                             <div className="product-gallery">
                                 <div className="main-image-container">
                                     <img
-                                        src={product.image || '/images/Images.webp'}
+                                        src={product.image_url || '/images/Images.webp'}
                                         alt={product.name}
                                         className="main-product-image"
                                     />
@@ -149,7 +149,7 @@ const DetailProductPage = () => {
                                     )}
                                 </div>
                                 <div className="thumbnail-gallery">
-                                    <img src={product.image || '/images/Images.webp'} alt="" className="thumbnail active" />
+                                    <img src={product.image_url || '/images/Images.webp'} alt="" className="thumbnail active" />
                                     <img src="/images/Images.webp" alt="" className="thumbnail" />
                                     <img src="/images/Images.webp" alt="" className="thumbnail" />
                                     <img src="/images/Images.webp" alt="" className="thumbnail" />

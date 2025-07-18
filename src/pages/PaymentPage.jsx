@@ -10,21 +10,26 @@ const PaymentPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    const USE_API = false; // 👉 Đặt thành true để bật lại khi cần
+
     const handlePayment = async () => {
         setIsLoading(true);
         setError('');
         const orderId = localStorage.getItem('orderId');
-        const token = localStorage.getItem('token');
 
+        if (!USE_API) {
+            // 👇 Dùng link giả khi không gọi API
+            const fakePaymentUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
+            localStorage.setItem('qrPaymentUrl', fakePaymentUrl);
+            navigate('/qr');
+            setIsLoading(false);
+            return;
+        }
+
+        const token = localStorage.getItem('token');
         try {
-            // Chuẩn bị dữ liệu thanh toán
             const paymentData = {
-                // amount: localStorage.getItem('totalAmount') || '10000', // Lấy số tiền từ localStorage hoặc mặc định
                 orderDescription: `Thanh toán đơn hàng ${orderId}`,
-                // orderType: 'billpayment',
-                // bankCode: 'NCB', // Có thể để trống để hiển thị tất cả ngân hàng
-                // language: 'vn',
-                // returnUrl: `${window.location.origin}/payment-success`, // URL callback khi thanh toán xong
                 orderId: orderId
             };
 
@@ -40,19 +45,18 @@ const PaymentPage = () => {
             );
 
             if (response.data?.paymentUrl) {
-                setPaymentUrl(response.data.paymentUrl);
-                window.location.href = response.data.paymentUrl; // Redirect to payment
+                localStorage.setItem('qrPaymentUrl', response.data.paymentUrl);
+                navigate('/qr');
             } else {
                 setError('Không thể tạo liên kết thanh toán.');
-                console.error('Response không có paymentUrl:', response.data);
             }
         } catch (err) {
             setError('Đã xảy ra lỗi khi tạo thanh toán.');
-            console.error('Lỗi thanh toán:', err.response?.data || err.message);
         } finally {
             setIsLoading(false);
         }
     };
+
 
     return (
         <div className="payment-page-container">
