@@ -13,6 +13,7 @@ const AI = () => {
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
     const fileInputRef = useRef(null);
+    const [suggestedProducts, setSuggestedProducts] = useState([]);
 
     const toggleChat = () => setIsOpen(!isOpen);
 
@@ -41,13 +42,16 @@ const AI = () => {
                 .split('\n')
                 .map(line => line.replace(/^\*+|\*+$/g, ''))
                 .join('\n');
+            const products = response.data.products || [];
             setMessages([...newMessages, { sender: 'bot', text: cleanReply }]);
+            setSuggestedProducts(products);
         } catch (error) {
             console.error('Error:', error);
             setMessages([
                 ...newMessages,
                 { sender: 'bot', text: 'Đã xảy ra lỗi khi kết nối với AI.' },
             ]);
+            setSuggestedProducts([]);
         } finally {
             setLoading(false);
         }
@@ -99,13 +103,16 @@ const AI = () => {
                 .split('\n')
                 .map(line => line.replace(/^\*+|\*+$/g, ''))
                 .join('\n');
+            const products = response.data.products || [];
             setMessages([...newMessages, { sender: 'bot', text: cleanReply }]);
+            setSuggestedProducts(products);
         } catch (error) {
             console.error('Error:', error);
             setMessages([
                 ...newMessages,
                 { sender: 'bot', text: 'Đã xảy ra lỗi khi phân tích ảnh.' },
             ]);
+            setSuggestedProducts([]);
         } finally {
             setLoading(false);
         }
@@ -165,6 +172,19 @@ const AI = () => {
                                 </div>
                             ))}
                             {loading && <div className="chat-message bot">Đang trả lời...</div>}
+                            {suggestedProducts.length > 0 && (
+                                <div className="suggested-products mt-3">
+                                    <strong>Sản phẩm gợi ý:</strong>
+                                    <div className="product-list d-flex flex-wrap mt-2">
+                                        {suggestedProducts.map((product, idx) => (
+                                            <div key={idx} className="product-item me-3 mb-2" style={{ display: 'inline-block', textAlign: 'center' }}>
+                                                <img src={product.image} alt={product.name} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8 }} />
+                                                <div style={{ fontSize: 18, fontWeight: 'bold', color: '#1a237e', marginTop: 4 }}>{product.name}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div className="chat-input d-flex align-items-center px-2 py-2">

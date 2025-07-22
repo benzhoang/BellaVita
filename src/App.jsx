@@ -18,6 +18,8 @@ import DetailProductPage from './pages/DetailProductPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResult from "./pages/PaymentResult";
 import QRPage from './pages/QRPage';
+import Settings from './components/SidebarSettings';
+import History from './pages/HistoryPage';
 
 import AdminLayout from "./layout/AdminLayout";
 import Dashboard from "./pages/admin/DashboardPage";
@@ -51,6 +53,8 @@ const AppLayout = () => {
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/payment-result" element={<PaymentResult />} />
           <Route path="/qr" element={<QRPage />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/order-history" element={<History />} />
 
           {/* Admin dashboard  */}
           <Route path="/admin" element={<AdminLayout />}>
