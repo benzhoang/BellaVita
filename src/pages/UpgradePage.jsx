@@ -1,4 +1,5 @@
 import "../styles/UpgradePage.scss";
+import { Link } from "react-router-dom";
 
 const UpgradePage = () => {
     return (
@@ -19,7 +20,9 @@ const UpgradePage = () => {
                                 <li>Hỗ trợ khách hàng qua chatbot 24/7.</li>
                                 <li>Nhận thông báo khuyến mãi & sản phẩm mới phù hợp.</li>
                             </ul>
-                            <button className="btn btn-secondary w-100 mt-auto" disabled>Gói hiện tại của bạn</button>
+                            <button className="btn btn-secondary w-100 mt-auto" disabled>
+                                Gói hiện tại của bạn
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -32,7 +35,9 @@ const UpgradePage = () => {
                                 Premium Plan <span className="badge bg-secondary text-white">Phổ biến</span>
                             </h3>
                             <h2 className="price">250.000 <small>VNĐ/tháng</small></h2>
-                            <p className="description">Dành cho người dùng thường xuyên cần tư vấn chuyên sâu & ưu đãi độc quyền.</p>
+                            <p className="description">
+                                Dành cho người dùng thường xuyên cần tư vấn chuyên sâu & ưu đãi độc quyền.
+                            </p>
                             <ul className="features flex-grow-1">
                                 <li>Tất cả các tiện ích từ Basic Plan.</li>
                                 <li>AI tư vấn nâng cao theo thời gian thực (phân tích thói quen, khí hậu, độ tuổi...).</li>
@@ -42,7 +47,9 @@ const UpgradePage = () => {
                                 <li>Ưu tiên xử lý đơn hàng và giao hàng nhanh.</li>
                                 <li>Tự động cập nhật routine chăm sóc theo mùa, thời tiết và xu hướng.</li>
                             </ul>
-                            <button className="btn btn-warning w-100 mt-auto">Chuyển sang Plus</button>
+                            <Link to="/qr" className="btn btn-warning w-100 mt-auto">
+                                Chuyển sang Plus
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -53,8 +60,9 @@ const UpgradePage = () => {
                         <div className="card-body d-flex flex-column">
                             <h3 className="card-title">Annual Plan</h3>
                             <h2 className="price">1.200.000 <small>VNĐ/năm</small></h2>
-                            <p className="description">Gói tiết kiệm nhất với đầy đủ tiện ích cao cấp và
-                                quyền lợi dành riêng cho thành viên VIP.</p>
+                            <p className="description">
+                                Gói tiết kiệm nhất với đầy đủ tiện ích cao cấp và quyền lợi dành riêng cho thành viên VIP.
+                            </p>
                             <ul className="features flex-grow-1">
                                 <li>Tất cả các tiện ích từ Premium Plan.</li>
                                 <li>Tư vấn trực tiếp với chuyên gia mỗi quý (qua video call).</li>
@@ -65,7 +73,9 @@ const UpgradePage = () => {
                                 <li>Theo dõi tiến trình cải thiện làn da qua AI định kỳ (Skin Progress Tracker).</li>
                                 <li>Huy hiệu thành viên VIP & quyền truy cập nhóm cộng đồng riêng tư.</li>
                             </ul>
-                            <button className="btn btn-dark w-100 mt-auto">Chuyển sang Pro</button>
+                            <Link to="/qr" className="btn btn-dark w-100 mt-auto">
+                                Chuyển sang Pro
+                            </Link>
                         </div>
                     </div>
                 </div>

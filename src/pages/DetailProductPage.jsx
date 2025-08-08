@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/DetailProductPage.scss';
 import { FaStar, FaRegStar, FaShoppingCart, FaHeart, FaShare } from 'react-icons/fa';
@@ -13,7 +13,7 @@ const DetailProductPage = () => {
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState('description');
-
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -21,6 +21,12 @@ const DetailProductPage = () => {
                 const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
                 setProduct(response.data);
                 setLoading(false);
+
+                // Fetch all products and get 4 random related products
+                const allProductsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+                const filteredProducts = allProductsResponse.data.filter(p => p.id !== id);
+                const shuffledProducts = filteredProducts.sort(() => 0.5 - Math.random());
+                setRelatedProducts(shuffledProducts.slice(0, 4));
             } catch (error) {
                 console.error("Lỗi khi fetch chi tiết sản phẩm:", error);
                 setLoading(false);
@@ -34,7 +40,6 @@ const DetailProductPage = () => {
         setQuantity(prev => Math.max(1, prev + change));
     };
 
-    // Function to create an order (add to cart)
     const createOrder = async () => {
         try {
             const userId = localStorage.getItem('userId');
@@ -71,7 +76,6 @@ const DetailProductPage = () => {
         }
     };
 
-    // Thêm hàm handleAddToCart để sửa lỗi
     const handleAddToCart = async () => {
         const result = await createOrder();
         if (result) {
@@ -102,14 +106,18 @@ const DetailProductPage = () => {
         );
     }
 
-    // Giả lập dữ liệu đánh giá
     const rating = 4.5;
     const reviewCount = 28;
-
-    // Tính giá giảm giá (giả sử giảm 40%)
     const discountPercent = 40;
     const originalPrice = product.price;
     const discountedPrice = originalPrice * (1 - discountPercent / 100);
+
+    const thumbnailImages = [
+        product.image_url || '/images/Images.webp',
+        product.image_url || '/images/Images.webp',
+        product.image_url || '/images/Images.webp',
+        product.image_url || '/images/Images.webp',
+    ];
 
     return (
         <div className="detail-product-page">
@@ -149,10 +157,14 @@ const DetailProductPage = () => {
                                     )}
                                 </div>
                                 <div className="thumbnail-gallery">
-                                    <img src={product.image_url || '/images/Images.webp'} alt="" className="thumbnail active" />
-                                    <img src="/images/Images.webp" alt="" className="thumbnail" />
-                                    <img src="/images/Images.webp" alt="" className="thumbnail" />
-                                    <img src="/images/Images.webp" alt="" className="thumbnail" />
+                                    {thumbnailImages.map((img, index) => (
+                                        <img
+                                            key={index}
+                                            src={img}
+                                            alt={`${product.name} thumbnail ${index + 1}`}
+                                            className={`thumbnail ${index === 0 ? 'active' : ''}`}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -356,28 +368,30 @@ const DetailProductPage = () => {
                 <div className="related-products">
                     <h3 className="section-title">Sản phẩm liên quan</h3>
                     <div className="row">
-                        {[1, 2, 3, 4].map(item => (
-                            <div className="col-md-3" key={item}>
-                                <div className="product-card">
+                        {relatedProducts.map(product => (
+                            <div className="col-md-3" key={product.id}>
+                                <Link to={`/product/${product.product_id}`} className="product-card">
                                     <div className="product-image">
-                                        <img src="/images/Images.webp" alt="Related product" />
+                                        <img src={product.image_url || '/images/Images.webp'} alt={product.name} />
                                     </div>
                                     <div className="product-info">
-                                        <h5 className="product-name">Sản phẩm liên quan {item}</h5>
+                                        <h5 className="product-name">{product.name}</h5>
                                         <div className="product-price">
-                                            <span className="current-price">350.000 đ</span>
-                                            <span className="original-price">500.000 đ</span>
+                                            <span className="current-price">{Math.round(product.price * (1 - 0.4)).toLocaleString()} đ</span>
+                                            <span className="original-price">{Math.round(product.price).toLocaleString()} đ</span>
                                         </div>
                                         <div className="product-rating">
-                                            <FaStar className="star filled" />
-                                            <FaStar className="star filled" />
-                                            <FaStar className="star filled" />
-                                            <FaStar className="star filled" />
-                                            <FaRegStar className="star" />
+                                            {[...Array(5)].map((_, i) => (
+                                                i < Math.floor(4.5)
+                                                    ? <FaStar key={i} className="star filled" />
+                                                    : i < 4.5
+                                                        ? <FaStar key={i} className="star half-filled" />
+                                                        : <FaRegStar key={i} className="star" />
+                                            ))}
                                             <span className="rating-count">(15)</span>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         ))}
                     </div>
