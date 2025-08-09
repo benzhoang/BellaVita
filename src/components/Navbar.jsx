@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../images/Logo.jpg';
 import '../styles/Navbar.scss';
+// Removed cart count logic
 
 const Navbar = () => {
     const searchRef = useRef();
@@ -13,6 +14,7 @@ const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState({ products: [], categories: [] });
     const [showDropdown, setShowDropdown] = useState(false);
+    // Removed cart count state
     const navigate = useNavigate();
     const dropdownRef = useRef();
 
@@ -148,6 +150,8 @@ const Navbar = () => {
     };
 
     const handleSetting = () => {
+         // Placeholder for settings navigation or action
+         console.log("Navigating to settings");
         navigate('/settings');
     };
 
@@ -215,11 +219,11 @@ const Navbar = () => {
                     </div>
                     <ul className="navbar-nav gap-3">
                         <li className="nav-item"><Link className="nav-link" to="/">Trang chủ</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/upgrade">Nâng cấp</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/about">Về chúng tôi</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/upgrade">Nâng cấp</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/product">Sản phẩm</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="/discount">Khuyến mãi</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/cart">Kiểm tra đơn hàng</Link></li>
+                        
                     </ul>
                 </div>
 
@@ -266,6 +270,12 @@ const Navbar = () => {
                             </ul>
                         )}
                     </div>
+
+                    {/* Cart Icon (no badge) */}
+                    <Link to="/cart" className="btn btn-cart position-relative">
+                        <i className="bi bi-cart3 fs-4"></i>
+                    </Link>
+                    
                     {isLoggedIn ? (
                         <div className="dropdown">
                             <button

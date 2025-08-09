@@ -29,7 +29,14 @@ const LoginPage = () => {
             } else {
                 localStorage.setItem('userEmail', email);
                 localStorage.setItem('userId', userId);
-                navigate('/');
+                // Điều hướng sau đăng nhập
+                const redirectPath = localStorage.getItem('redirectAfterLogin');
+                if (redirectPath) {
+                    localStorage.removeItem('redirectAfterLogin');
+                    navigate(redirectPath);
+                } else {
+                    navigate('/');
+                }
             }
         } catch (err) {
             console.error(err);

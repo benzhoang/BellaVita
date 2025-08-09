@@ -1,7 +1,21 @@
 import "../styles/UpgradePage.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const UpgradePage = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleUpgradeClick = () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Vui lòng đăng nhập để nâng cấp gói.');
+            localStorage.setItem('redirectAfterLogin', location.pathname);
+            navigate('/login');
+            return;
+        }
+        navigate('/qr');
+    };
+
     return (
         <div className="pricing-container container-fluid py-5">
             <div className="row justify-content-center align-items-stretch mt-5">
@@ -47,9 +61,9 @@ const UpgradePage = () => {
                                 <li>Ưu tiên xử lý đơn hàng và giao hàng nhanh.</li>
                                 <li>Tự động cập nhật routine chăm sóc theo mùa, thời tiết và xu hướng.</li>
                             </ul>
-                            <Link to="/qr" className="btn btn-warning w-100 mt-auto">
+                            <button className="btn btn-warning w-100 mt-auto" onClick={handleUpgradeClick}>
                                 Chuyển sang Plus
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -73,9 +87,9 @@ const UpgradePage = () => {
                                 <li>Theo dõi tiến trình cải thiện làn da qua AI định kỳ (Skin Progress Tracker).</li>
                                 <li>Huy hiệu thành viên VIP & quyền truy cập nhóm cộng đồng riêng tư.</li>
                             </ul>
-                            <Link to="/qr" className="btn btn-dark w-100 mt-auto">
+                            <button className="btn btn-dark w-100 mt-auto" onClick={handleUpgradeClick}>
                                 Chuyển sang Pro
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -14,12 +14,27 @@ const DetailProductPage = () => {
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState('description');
     const [relatedProducts, setRelatedProducts] = useState([]);
+    const [categoryName, setCategoryName] = useState('');
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
                 setProduct(response.data);
+
+                // Fetch category name if category_id exists
+                if (response.data.category_id) {
+                    try {
+                        const categoryResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/categories/${response.data.category_id}`);
+                        setCategoryName(categoryResponse.data.name);
+                    } catch (categoryError) {
+                        console.error("Lỗi khi fetch danh mục:", categoryError);
+                        setCategoryName('Chưa phân loại');
+                    }
+                } else {
+                    setCategoryName('Chưa phân loại');
+                }
+
                 setLoading(false);
 
                 // Fetch all products and get 4 random related products
@@ -45,8 +60,11 @@ const DetailProductPage = () => {
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
 
-            if (!userId) {
-                toast.error('Không tìm thấy userId hợp lệ.', { autoClose: 2000 });
+            if (!token || !userId) {
+                alert('Vui lòng đăng nhập để tiếp tục.');
+                // Lưu đường dẫn hiện tại để quay lại sau khi đăng nhập
+                localStorage.setItem('redirectAfterLogin', `/product/${id}`);
+                navigate('/login');
                 return null;
             }
 
@@ -235,7 +253,7 @@ const DetailProductPage = () => {
                                 <div className="product-category-tag">
                                     <div className="product-category">
                                         <span className="label">Danh mục:</span>
-                                        <a href={`/product?category=${product.category}`} className="value">{product.category || 'Chưa phân loại'}</a>
+                                        <a href={`/product?category=${categoryName}`} className="value">{categoryName}</a>
                                     </div>
                                 </div>
                             </div>

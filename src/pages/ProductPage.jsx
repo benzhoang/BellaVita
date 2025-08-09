@@ -176,7 +176,10 @@ const ProductPage = () => {
                                 <div className="d-flex justify-content-between mt-2">
                                     <button
                                         className="btn btn-outline-secondary btn-sm"
-                                        onClick={(e) => e.stopPropagation()}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            navigate(`/product/${product.product_id}`);
+                                        }}
                                     >
                                         Thêm vào giỏ hàng
                                     </button>

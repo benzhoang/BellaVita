@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/QRPage.scss';
 import QRImage from '../images/QR.jpg';
 import Logo from '../images/Logo.jpg';
+import { clearCartData } from '../utils/cartUtils';
 
 const QRPage = () => {
     const [loading, setLoading] = useState(true);
@@ -17,7 +18,12 @@ const QRPage = () => {
     const handleQRScan = () => {
         // Giả lập thời gian quét mã QR
         setTimeout(() => {
+            // Hiện popup xác nhận
             setShowPopup(true);
+            // Xóa toàn bộ dữ liệu giỏ hàng và đơn hàng cục bộ để CartPage rỗng
+            clearCartData();
+            // Thông báo cho các component khác nếu cần
+            window.dispatchEvent(new Event('cartUpdated'));
         }, 1000); // Delay giả lập
     };
 

@@ -138,6 +138,51 @@
             font-size: 1rem;
         }
     }
+
+    .btn-cart {
+        background: transparent;
+        border: none;
+        color: #2c3e50;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        min-width: 50px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #1a252f;
+        }
+
+        i {
+            font-size: 1.5rem;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #28a745 !important; // Badge màu xanh lá
+            color: white !important; // Số màu trắng
+            border: 2px solid #28a745; // Viền xanh lá
+            font-weight: 600;
+        }
+        
+        // Khi giỏ hàng trống (số lượng = 0)
+        .badge.empty-cart {
+            background-color: #6c757d !important;
+            color: white !important;
+            border-color: #6c757d;
+        }
+    }
 }
 
 .btn-user {
