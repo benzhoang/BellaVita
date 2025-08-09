@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap-icons/font/bootstrap-icons.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../images/Logo.jpg';
@@ -10,7 +10,11 @@ const Navbar = () => {
     const searchRef = useRef();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userEmail, setUserEmail] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState({ products: [], categories: [] });
+    const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
+    const dropdownRef = useRef();
 
     const truncateEmail = (email) => {
         if (!email) return '';
@@ -34,11 +38,103 @@ const Navbar = () => {
         }
     }, []);
 
+    // Fetch products and categories when searchQuery changes
+    useEffect(() => {
+        const fetchData = async () => {
+            if (searchQuery.trim() === '') {
+                setSearchResults({ products: [], categories: [] });
+                setShowDropdown(false);
+                return;
+            }
+
+            try {
+                // Fetch products
+                const productResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
+                if (!productResponse.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const products = await productResponse.json();
+
+                // Fetch categories
+                const categoryResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
+                if (!categoryResponse.ok) {
+                    throw new Error('Failed to fetch categories');
+                }
+                const categories = await categoryResponse.json();
+
+                // Filter products and categories based on the search query (case-insensitive)
+                const filteredProducts = products.filter((product) =>
+                    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                const filteredCategories = categories.filter((category) =>
+                    category.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+
+                setSearchResults({ products: filteredProducts, categories: filteredCategories });
+                setShowDropdown(filteredProducts.length > 0 || filteredCategories.length > 0);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setSearchResults({ products: [], categories: [] });
+                setShowDropdown(false);
+            }
+        };
+
+        // Debounce the API call to avoid excessive requests
+        const debounce = setTimeout(() => {
+            fetchData();
+        }, 300);
+
+        return () => clearTimeout(debounce);
+    }, [searchQuery]);
+
+    // Handle clicks outside the dropdown to close it
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowDropdown(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const handleSearchInput = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
     const handleSearch = () => {
         const query = searchRef.current.value.trim();
         if (query) {
-            console.log("Searching for:", query);
+            // Check if the query exactly matches a category name
+            const matchedCategory = searchResults.categories.find(
+                (category) => category.name.toLowerCase() === query.toLowerCase()
+            );
+            if (matchedCategory) {
+                // Navigate to ProductPage with the matched category
+                setShowDropdown(false);
+                setSearchQuery('');
+                searchRef.current.value = '';
+                navigate(`/product?category_id=${matchedCategory.category_id}`);
+            } else {
+                // Navigate to a search results page for products
+                navigate(`/search?query=${encodeURIComponent(query)}`);
+                setShowDropdown(false);
+            }
         }
+    };
+
+    const handleProductClick = (product) => {
+        setShowDropdown(false);
+        setSearchQuery('');
+        searchRef.current.value = '';
+        navigate(`/product/${product.product_id}`);
+    };
+
+    const handleCategoryClick = (category) => {
+        setShowDropdown(false);
+        setSearchQuery('');
+        searchRef.current.value = '';
+        navigate(`/product?category_id=${category.category_id}`);
     };
 
     const handleLogout = () => {
@@ -52,9 +148,7 @@ const Navbar = () => {
     };
 
     const handleSetting = () => {
-        // Placeholder for settings navigation or action
-        console.log("Navigating to settings");
-        navigate('/settings'); // Adjust the route as needed
+        navigate('/settings');
     };
 
     return (
@@ -78,16 +172,46 @@ const Navbar = () => {
 
                 {/* Centered links */}
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <div className="input-group search-box d-lg-none mt-3 mb-2">
+                    <div className="input-group search-box d-lg-none mt-3 mb-2" ref={dropdownRef}>
                         <input
                             type="text"
                             className="form-control"
                             placeholder="Search..."
                             ref={searchRef}
+                            onChange={handleSearchInput}
                         />
                         <button className="btn btn-search" onClick={handleSearch}>
                             <i className="bi bi-search text-white"></i>
                         </button>
+                        {showDropdown && (
+                            <ul className="dropdown-menu show w-100 mt-1">
+                                {searchResults.categories.map((category) => (
+                                    <li key={`category-${category.category_id}`}>
+                                        <button
+                                            className="dropdown-item d-flex align-items-center"
+                                            onClick={() => handleCategoryClick(category)}
+                                        >
+                                            <span className="search-category-name">[Category] {category.name}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                                {searchResults.products.map((product) => (
+                                    <li key={`product-${product.product_id}`}>
+                                        <button
+                                            className="dropdown-item d-flex align-items-center"
+                                            onClick={() => handleProductClick(product)}
+                                        >
+                                            <img
+                                                src={product.image_url || '/images/Images.webp'}
+                                                alt={product.name}
+                                                className="search-product-image"
+                                            />
+                                            <span className="search-product-name">[Product] {product.name}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                     <ul className="navbar-nav gap-3">
                         <li className="nav-item"><Link className="nav-link" to="/">Trang chủ</Link></li>
@@ -101,16 +225,46 @@ const Navbar = () => {
 
                 {/* Right: search + user info/buttons */}
                 <div className="d-flex align-items-center gap-2">
-                    <div className="input-group search-box d-none d-lg-flex">
+                    <div className="input-group search-box d-none d-lg-flex" ref={dropdownRef}>
                         <input
                             type="text"
                             className="form-control"
                             placeholder="Search..."
                             ref={searchRef}
+                            onChange={handleSearchInput}
                         />
                         <button className="btn btn-search" onClick={handleSearch}>
                             <i className="bi bi-search text-white"></i>
                         </button>
+                        {showDropdown && (
+                            <ul className="dropdown-menu show w-100 mt-1">
+                                {searchResults.categories.map((category) => (
+                                    <li key={`category-${category.category_id}`}>
+                                        <button
+                                            className="dropdown-item d-flex align-items-center"
+                                            onClick={() => handleCategoryClick(category)}
+                                        >
+                                            <span className="search-category-name">[Category] {category.name}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                                {searchResults.products.map((product) => (
+                                    <li key={`product-${product.product_id}`}>
+                                        <button
+                                            className="dropdown-item d-flex align-items-center"
+                                            onClick={() => handleProductClick(product)}
+                                        >
+                                            <img
+                                                src={product.image_url || '/images/Images.webp'}
+                                                alt={product.name}
+                                                className="search-product-image"
+                                            />
+                                            <span className="search-product-name">[Product] {product.name}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                     {isLoggedIn ? (
                         <div className="dropdown">

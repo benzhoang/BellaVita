@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/ProductPage.scss';
 import Image from '../images/Images.webp';
@@ -13,6 +13,16 @@ const ProductPage = () => {
     const [activeCategory, setActiveCategory] = useState('all');
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        // Read category_id from URL query parameters
+        const queryParams = new URLSearchParams(location.search);
+        const categoryId = queryParams.get('category_id');
+        if (categoryId) {
+            setActiveCategory(categoryId);
+        }
+    }, [location.search]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +36,7 @@ const ProductPage = () => {
                 const productsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
                 setProducts(productsResponse.data || []);
             } catch (error) {
-                console.error("Lỗi khi fetch dữ liệu:", error);
+                console.error('Lỗi khi fetch dữ liệu:', error);
             } finally {
                 setLoading(false);
             }
@@ -102,6 +112,7 @@ const ProductPage = () => {
                         onClick={() => {
                             setActiveCategory('all');
                             setCurrentPage(1);
+                            navigate('/product'); // Remove query parameter
                         }}
                     >
                         Tất cả
@@ -113,6 +124,7 @@ const ProductPage = () => {
                             onClick={() => {
                                 setActiveCategory(category.category_id.toString());
                                 setCurrentPage(1);
+                                navigate(`/product?category_id=${category.category_id}`);
                             }}
                         >
                             {category.name}

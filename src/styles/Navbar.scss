@@ -6,23 +6,20 @@
     .navbar-logo {
         height: 60px;
         width: 60px;
-        /* Adjusted to match height for circular shape */
         object-fit: contain;
         border-radius: 50%;
-        /* Make logo circular */
     }
 
     .navbar-brand {
         display: flex;
         align-items: center;
         gap: 10px;
-        /* Space between logo and text */
     }
 
     .navbar-title {
         font-family: 'Meow Script';
         font-size: 1.8rem;
-        color: #000; // or your desired color
+        color: #000;
         margin-left: 8px;
     }
 
@@ -37,29 +34,74 @@
 
     .search-box {
         margin-right: 10px;
-        background-color: transparent; // Trong suốt
+        background-color: transparent;
         border-radius: 0.375rem;
         width: 300px;
-        border: 1px solid #8C897F; // Viền nhẹ nhàng, gần tông với #A4A199
+        border: 1px solid #8C897F;
 
         .form-control {
-            background-color: transparent; // Input trong suốt
+            background-color: transparent;
             color: white;
-            border: none; // Bỏ viền input để hòa với search-box
+            border: none;
 
             &::placeholder {
                 color: rgba(255, 255, 255, 0.8);
             }
 
             &:focus {
-                border-color: transparent; // Không viền khi focus
+                border-color: transparent;
                 box-shadow: none;
             }
         }
 
         .input-group-text {
-            background-color: transparent; // Trong suốt cho input-group-text
-            border: none; // Bỏ viền
+            background-color: transparent;
+            border: none;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            padding: 8px;
+
+            .dropdown-item {
+                padding: 8px 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                margin: 2px 0;
+
+                &:hover {
+                    background-color: #f8f9fa;
+                }
+
+                .search-product-image {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: cover;
+                    margin-right: 8px;
+                    border-radius: 3px;
+                }
+
+                .search-product-name {
+                    flex: 1;
+                    font-size: 13px;
+                    color: #333;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
         }
     }
 
@@ -80,15 +122,15 @@
     }
 
     .btn-search {
-        background-color: #8C897F; // Màu gần tông với #A4A199
-        border: none; // Bỏ viền để gắn liền với input trong suốt
+        background-color: #8C897F;
+        border: none;
         color: white;
         padding: 0.375rem 0.75rem;
         border-top-right-radius: 0.375rem;
         border-bottom-right-radius: 0.375rem;
 
         &:hover {
-            background-color: #7A7368; // Tông tối hơn một chút khi hover
+            background-color: #7A7368;
             color: white;
         }
 
@@ -283,32 +325,31 @@
 @media (max-width: 768px) {
     .custom-navbar .container-fluid {
         display: flex;
-        flex-wrap: nowrap; /* Prevent items from wrapping */
+        flex-wrap: nowrap;
         align-items: center;
     }
 
     .custom-navbar .navbar-toggler {
-        order: 1; /* Toggler first */
+        order: 1;
     }
 
     .custom-navbar .navbar-brand {
-        order: 2; /* Brand second */
-        margin-left: 1rem; /* Space between toggler and brand */
-    }
-    
-    .custom-navbar .d-flex.align-items-center.gap-2 {
-        order: 3; /* Right-side items third */
-        margin-left: auto; /* Push this group to the far right */
+        order: 2;
+        margin-left: 1rem;
     }
 
-    /* Make the collapsed menu an overlay and center its content */
+    .custom-navbar .d-flex.align-items-center.gap-2 {
+        order: 3;
+        margin-left: auto;
+    }
+
     .custom-navbar .navbar-collapse {
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background-color: #A4A199; /* Match navbar background */
-        z-index: 1021; /* Ensure it's above other content */
+        background-color: #A4A199;
+        z-index: 1021;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         padding: 1rem;
         display: flex;
@@ -336,6 +377,7 @@
     .custom-navbar .navbar-collapse {
         display: none !important;
     }
+
     .custom-navbar .navbar-collapse.show {
         display: flex !important;
     }
@@ -343,9 +385,9 @@
 
 @media (max-width: 480px) {
     .custom-navbar .navbar-brand {
-        display: none; /* Hide brand on very small screens to avoid clutter */
+        display: none;
     }
-    
+
     .custom-navbar .btn-login,
     .custom-navbar .btn-signup {
         min-width: auto;
@@ -356,7 +398,14 @@
     .custom-navbar .navbar-collapse {
         display: none !important;
     }
+
     .custom-navbar .navbar-collapse.show {
         display: flex !important;
     }
+}
+
+.search-category-name {
+    font-weight: bold;
+    color: #007bff;
+    /* Optional: Style categories differently */
 }
