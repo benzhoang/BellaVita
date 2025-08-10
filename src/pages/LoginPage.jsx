@@ -102,6 +102,12 @@ const LoginPage = () => {
                     </button>
                     <div className="mt-3">
                         <p className="small">
+                            Quay về trang chủ{' '}
+                            <Link to="/">Trang chủ</Link>
+                        </p>
+                    </div>
+                    <div className="mt-3">
+                        <p className="small">
                             Chưa có tài khoản?{' '}
                             <Link to="/signup">Đăng ký ngay</Link>
                         </p>

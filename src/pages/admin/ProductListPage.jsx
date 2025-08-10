@@ -162,13 +162,13 @@ const ProductList = () => {
                 <td>{product.stock}</td>
                 <td><span className={`status ${product.status.toLowerCase()}`}>{product.status}</span></td>
                 <td>
-                  <button title="Xem chi tiết" className="icon-btn view" onClick={() => handleViewClick(product)}>
+                  <button title="View detail" className="icon-btn view" onClick={() => handleViewClick(product)}>
                     <FaEye />
                   </button>
-                  <button title="Sửa" className="icon-btn edit" onClick={() => handleEditClick(product)}>
+                  <button title="Edit" className="icon-btn edit" onClick={() => handleEditClick(product)}>
                     <FaEdit />
                   </button>
-                  <button title="Xoá" className="icon-btn delete" onClick={() => handleDelete(product.id)}>
+                  <button title="Delete" className="icon-btn delete" onClick={() => handleDelete(product.id)}>
                     <FaTrash />
                   </button>
                 </td>

@@ -1,38 +1,41 @@
 // src/admin/AdminLayout.jsx
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-// import './assets/admin.scss';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import '../styles/Admin.scss';
 
 export default function AdminLayout() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Xóa token hoặc thông tin đăng nhập   
+    localStorage.removeItem("authToken"); 
+    sessionStorage.removeItem("authUser");
+    // Điều hướng về trang đăng nhập
+    navigate("/login");
+  };
+
   return (
-    <div className="container-fluid">
-      <div className="row min-vh-100">
-        {/* Sidebar */}
-        <aside className="col-12 col-md-3 col-lg-2 bg-dark text-white p-3 admin-sidebar">
-          <h4 className="text-center">Admin Panel</h4>
-          <nav className="nav flex-column">
-            <NavLink to="/admin" end className="nav-link text-white" activeclassname="active">Dashboard</NavLink>
-            <NavLink to="/admin/users" className="nav-link text-white" activeclassname="active">Người dùng</NavLink>
-            <NavLink to="/admin/products" className="nav-link text-white" activeclassname="active">Sản phẩm</NavLink>
-            <NavLink to="/admin/orders" className="nav-link text-white" activeclassname="active">Đơn hàng</NavLink>
-          </nav>
-        </aside>
+    <div className="admin-layout">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="logo">SkinTime Admin</div>
+        <nav className="menu">
+          <NavLink to="/admin" end>Dashboard</NavLink>
+          <NavLink to="/admin/users">Người dùng</NavLink>
+          <NavLink to="/admin/products">Sản phẩm</NavLink>
+          <NavLink to="/admin/orders">Đơn hàng</NavLink>
+        </nav>
+        <button className="logout-btn" onClick={handleLogout}>Đăng xuất</button>
+      </aside>
 
-        {/* Main content */}
-        <div className="col-12 col-md-9 col-lg-10 admin-main">
-          {/* Navbar */}
-          <header className="bg-light p-3 shadow-sm admin-navbar">
-            <div className="d-flex justify-content-between align-items-center">
-              <h5 className="mb-0">Quản trị hệ thống</h5>
-              <div>Xin chào, Admin</div>
-            </div>
-          </header>
+      {/* Main */}
+      <div className="main">
+        <header className="header">
+          <div className="page-title">Quản trị hệ thống</div>
+        </header>
 
-          {/* Nội dung trang con */}
-          <main className="p-4">
-            <Outlet />
-          </main>
+        <div className="content">
+          <Outlet />
         </div>
       </div>
     </div>
