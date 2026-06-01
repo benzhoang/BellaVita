@@ -26,22 +26,23 @@ BellaVita is a full-stack cosmetics e-commerce platform featuring AI-powered pro
 - React
 - JavaScript
 - Axios
-- React Router
+- Bootstrap 5
 
 ### Backend
 - ExpressJS
 - PostgreSQL
-- JWT Authentication
 - Swagger
 
-### Cloud & Deployment
+### Deployment
 - Vercel
 - Render
 
-### Tools
-- Git & GitHub
-- Postman
-
 ## Contributing
 
-Contributions, suggestions, and feedback are welcome. Feel free to fork the repository, create a feature branch, and submit a pull request for review.
+**Back End**: **ASP.NET CORE API** 
+- [Nguyễn Lê Thái Phong](https://github.com/AuraNVC)
+- [Nguyễn Phúc Tấn](https://github.com/phuctan153)
+  
+**Front End**: **React + Vite**
+- [Hoàng Lê Nhật Minh](https://github.com/benzhoang) (Leader)
+- [Trần Nhật Hoàng](https://github.com/HoangTranNhat)
