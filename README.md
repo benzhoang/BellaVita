@@ -1,12 +1,47 @@
-# React + Vite
+# BellaVita - Cosmetics E-commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+BellaVita is a full-stack cosmetics e-commerce platform featuring AI-powered product recommendations, secure authentication, shopping cart management, and order processing to deliver a personalized online shopping experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+1. **Product Catalog & Search**: Allows users to browse, search, and filter cosmetic products by categories and attributes.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. **Shopping Cart Management**: Enables users to add, update, and remove products from their shopping carts.
+
+3. **User Authentication & Authorization**: Supports secure registration, login, and role-based access control.
+
+4. **Order Management**: Allows customers to place orders and track their purchase history.
+
+5. **AI-powered Product Recommendations**: Recommends relevant cosmetic products based on user preferences and shopping behavior.
+
+6. **Admin Product Management**: Enables administrators to manage products, categories, inventory, and product information.
+
+7. **Dashboard & Analytics**: Provides insights into sales performance, customer activities, and product trends.
+
+## Technology Stack
+
+### Frontend
+- React
+- JavaScript
+- Axios
+- React Router
+
+### Backend
+- ExpressJS
+- PostgreSQL
+- JWT Authentication
+- Swagger
+
+### Cloud & Deployment
+- Vercel
+- Render
+
+### Tools
+- Git & GitHub
+- Postman
+
+## Contributing
+
+Contributions, suggestions, and feedback are welcome. Feel free to fork the repository, create a feature branch, and submit a pull request for review.
